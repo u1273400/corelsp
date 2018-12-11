@@ -1,7 +1,57 @@
 ﻿@page "/"
 
     <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="/">
+                       PINS Space Management
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">You are Logged in!</div>
+    
+                        <div class="panel-body">
+                            <ul class="nav" role="tablist">
+                                <li role="presentation">
+                                    <a href="admin">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <ul class="nav nav-pills">
                 <li class="active"><a data-toggle="tab" href="#superman">Queensgate</a></li>
                 <li><a data-toggle="tab" href="#batman">The PackHorse</a></li>
@@ -28,7 +78,14 @@
     protected override async Task OnInitAsync()
     {
         // Simulate async initialization work
-        await Task.Delay(1000);
+        //await Task.Delay(1000);
+        //await JSRuntime.Current.InvokeAsync<bool>("init");
+
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        // Simulate async initialization work
+        //await Task.Delay(1000);
         await JSRuntime.Current.InvokeAsync<bool>("init");
 
     }
@@ -38,6 +95,12 @@
         //await Task.Delay(1000);
         JSRuntime.Current.InvokeAsync<bool>("log",new {msg="Init called"});
 
+    }
+    protected override void OnParametersSet()
+    {
+        // Simulate async initialization work
+        //await Task.Delay(1000);
+        JSRuntime.Current.InvokeAsync<bool>("log","Params set"});
 
     }
 
