@@ -56,6 +56,10 @@
                 <li class="active"><a data-toggle="tab" href="#superman">Queensgate</a></li>
                 <li><a data-toggle="tab" href="#batman">The PackHorse</a></li>
             </ul>
+            <div class="row">
+                <DateTimePicker />
+                <Slider />
+            </div>  
         
             <div id="superman" class="tab-pane fade in active">
                 <div id="myGrid" style="width:100%;height:250px;"></div>
@@ -78,14 +82,14 @@
     protected override async Task OnInitAsync()
     {
         // Simulate async initialization work
-        //await Task.Delay(1000);
+        await Task.Delay(1000);
         //await JSRuntime.Current.InvokeAsync<bool>("init");
 
     }
     protected override async Task OnParametersSetAsync()
     {
         // Simulate async initialization work
-        //await Task.Delay(1000);
+        await Task.Delay(1000);
         await JSRuntime.Current.InvokeAsync<bool>("init");
 
     }
@@ -99,8 +103,7 @@
     protected override void OnParametersSet()
     {
         // Simulate async initialization work
-        //await Task.Delay(1000);
-        JSRuntime.Current.InvokeAsync<bool>("log","Params set"});
+        JSRuntime.Current.InvokeAsync<bool>("log","Params set");
 
     }
 

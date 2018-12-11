@@ -1,0 +1,18 @@
+<!--<div>
+        <input id="ex2" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+</div>-->
+<div id="slider" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <div id="custom-handle" class="ui-slider-handle"></div>
+</div>
+
+@functions {
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Simulate async initialization work
+        await Task.Delay(1000);
+        //await JSRuntime.Current.InvokeAsync<bool>("init");
+
+    }
+
+}

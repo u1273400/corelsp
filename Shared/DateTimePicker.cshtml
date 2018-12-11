@@ -1,0 +1,23 @@
+<div class='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+    <div class="form-group">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+@functions {
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Simulate async initialization work
+        await Task.Delay(1000);
+        //await JSRuntime.Current.InvokeAsync<bool>("init");
+
+    }
+
+}

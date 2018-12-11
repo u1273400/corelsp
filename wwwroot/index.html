@@ -7,7 +7,9 @@
     <base href="/" />
     <!-- <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="css/site.css" rel="stylesheet" />
+    <link href="node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap-slider/dist/css/bootstrap-slider.css" rel="stylesheet" />
+    <!--<link href="css/gridplus.css" rel="stylesheet" />-->
     <link href="SlickGrid-master/slick.grid.css" rel="stylesheet" type="text/css" />
     <link href="SlickGrid-master/controls/slick.pager.css" rel="stylesheet" type="text/css" />
     <link href="SlickGrid-master/controls/slick.columnpicker.css" rel="stylesheet" type="text/css" />
@@ -19,7 +21,10 @@
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="SlickGrid-master/lib/jquery-1.11.2.js" type="application/javascript"></script>    
     <script src="SlickGrid-master/lib/jquery-ui-1.11.3.js" type="application/javascript"></script>    
+    <script src="node_modules/moment/min/moment.min.js"></script>
+    <script src="node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
     <script src="SlickGrid-master/lib/jquery.event.drag-2.3.0.js" type="application/javascript"></script>
     
     <script src="SlickGrid-master/slick.core.js" type="application/javascript"></script>
@@ -33,6 +38,7 @@
     <script src="SlickGrid-master/controls/slick.columnpicker.js"></script>
     
     <script src="js/slickgrid.js"></script>
+    <script src="js/morejs.js"></script>
     <script type="blazor-boot"></script>
     <script>
         // Define a very simple JavaScript function that just prints
@@ -40,6 +46,7 @@
         window.init = () => {
             console.log('init'+$("#myGrid").html());
             display_grid();
+            init2();
             console.log('done');
             return true;
         };
