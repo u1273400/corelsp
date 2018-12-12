@@ -84,19 +84,18 @@
     protected override async Task OnInitAsync()
     {
         //await JSRuntime.Current.InvokeAsync<bool>("init");
-
     }
     protected override async Task OnParametersSetAsync()
     {
         // Simulate async initialization work
         await Task.Delay(1000);
-        //buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
-        await init(poptestdata(),columns);
+        buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
+        await init(buildings.Take(10).ToList(),bldcols);
 
-    }
+    }/*
     protected override void OnInit()
     {
-        log(new {msg="Init called"});
+        //log(new {msg="Init called"});
 
     }
     protected override void OnParametersSet()
@@ -104,34 +103,9 @@
         // Simulate async initialization work
         log("Params set");
         //poptestdata();
-    }
+    }*/
     Building[] buildings;
-    class Building
-    {
-        public long BuildingId { get; set; }
-        public string BuildingRef { get; set; }
-        public string BuildingName { get; set; }
-        public DateTime tableDate { get; set; }
-    }
-    class Columns{
-        public string id;
-        public string name;
-        public string field;
-        public string behavior;
-        public string cssClass;
-        public string editor;
-        public string formatter;
-        public string validator;
-        public int width;
-        public int minWidth;
-        public int maxWidth;
-        public bool cannotTriggerInsert;
-        public bool resizable;
-        public bool sortable;
-        public bool selectable;
-        public bool defaultSortAsc;
-
-    }
+    /*
     object[] columns = new object[]{
         new{id= "sel", name= "#", field= "num", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable= false },
         new{id= "title", name= "Title", field= "title", width= 120, minWidth= 120, cssClass= "cell-title", editor= "Slick.Editors.Text", validator= "requiredFieldValidator", sortable= true},
@@ -140,5 +114,21 @@
         new{id= "start", name= "Start", field= "start", minWidth= 60, editor= "Slick.Editors.Date", sortable= true},
         new{id= "finish", name= "Finish", field= "finish", minWidth= 60, editor= "Slick.Editors.Date", sortable= true},
         new{id= "effort-driven", name= "Effort Driven", width= 80, minWidth= 20, maxWidth= 80, cssClass= "cell-effort-driven", field= "effortDriven", formatter= "Slick.Formatters.Checkbox", editor= "Slick.Editors.Checkbox", cannotTriggerInsert= true, sortable= true}
+    };*/
+    class Building
+    {
+        public long BuildingId { get; set; }
+        public string BuildingRef { get; set; }
+        public string BuildingName { get; set; }
+        public DateTime tableDate { get; set; }
+    }
+    
+    object[] bldcols = new object[]{
+        new{id= "sel", name= "#", field= "num", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable= false },
+        new{id= "BuildingRef", name= "Bldg Ref", field= "BuildingRef", selectable= false, minWidth= 60},
+        new{id= "BuildingName", name= "Building Name", field= "BuildingName", width= 120, minWidth= 120,  selectable= false},
+        new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 60, editor= "Slick.Editors.Date", selectable= false},
+        new{id= "id", name= "Id", field= "BuildingId", width= 40, cannotTriggerInsert= true,  selectable= false }
     };
+  
 }

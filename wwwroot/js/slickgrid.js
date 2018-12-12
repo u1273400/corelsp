@@ -58,18 +58,18 @@ function requiredFieldValidator(value) {
     return {valid: true, msg: null};
   }
 }
-function myFilter(item, args) {
-  if (item["percentComplete"] < args.percentCompleteThreshold) {
-    return false;
-  }
-  if (args.searchString != "" && item["title"].indexOf(args.searchString) == -1) {
-    return false;
-  }
-  return true;
-}
-function percentCompleteSort(a, b) {
-  return a["percentComplete"] - b["percentComplete"];
-}
+// function myFilter(item, args) {
+//   if (item["percentComplete"] < args.percentCompleteThreshold) {
+//     return false;
+//   }
+//   if (args.searchString != "" && item["title"].indexOf(args.searchString) == -1) {
+//     return false;
+//   }
+//   return true;
+// }
+// function percentCompleteSort(a, b) {
+//   return a["percentComplete"] - b["percentComplete"];
+// }
 function comparer(a, b) {
   var x = a[sortcol], y = b[sortcol];
   return (x == y ? 0 : (x > y ? 1 : -1));
@@ -101,97 +101,97 @@ function display_grid(data,cols){
     grid.onCellChange.subscribe(function (e, args) {
       dataView.updateItem(args.item.id, args.item);
     });
-    console.dir('debug here cols..'+columns);
     grid.onAddNewRow.subscribe(function (e, args) {
-    var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
-    $.extend(item, args.item);
-    dataView.addItem(item);
+      var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
+      $.extend(item, args.item);
+      dataView.addItem(item);
     });
     grid.onKeyDown.subscribe(function (e) {
-    // select all rows on ctrl-a
-    if (e.which != 65 || !e.ctrlKey) {
-        return false;
-    }
-    var rows = [];
-    for (var i = 0; i < dataView.getLength(); i++) {
-        rows.push(i);
-    }
-    grid.setSelectedRows(rows);
-    e.preventDefault();
+      // select all rows on ctrl-a
+      if (e.which != 65 || !e.ctrlKey) {
+          return false;
+      }
+      var rows = [];
+      for (var i = 0; i < dataView.getLength(); i++) {
+          rows.push(i);
+      }
+      grid.setSelectedRows(rows);
+        e.preventDefault();
     });
-    grid.onSort.subscribe(function (e, args) {
-    sortdir = args.sortAsc ? 1 : -1;
-    sortcol = args.sortCol.field;
-    if (isIEPreVer9()) {
-        // using temporary Object.prototype.toString override
-        // more limited and does lexicographic sort only by default, but can be much faster
-        var percentCompleteValueFn = function () {
-        var val = this["percentComplete"];
-        if (val < 10) {
-            return "00" + val;
-        } else if (val < 100) {
-            return "0" + val;
-        } else {
-            return val;
-        }
-        };
-        // use numeric sort of % and lexicographic for everything else
-        dataView.fastSort((sortcol == "percentComplete") ? percentCompleteValueFn : sortcol, args.sortAsc);
-    } else {
-        // using native sort with comparer
-        // preferred method but can be very slow in IE with huge datasets
-        dataView.sort(comparer, args.sortAsc);
-    }
-    });
+
+    // grid.onSort.subscribe(function (e, args) {
+    //   sortdir = args.sortAsc ? 1 : -1;
+    //   sortcol = args.sortCol.field;
+    //   if (isIEPreVer9()) {
+    //       // using temporary Object.prototype.toString override
+    //       // more limited and does lexicographic sort only by default, but can be much faster
+    //       var percentCompleteValueFn = function () {
+    //       var val = this["percentComplete"];
+    //       if (val < 10) {
+    //           return "00" + val;
+    //       } else if (val < 100) {
+    //           return "0" + val;
+    //       } else {
+    //           return val;
+    //       }
+    //       };
+    //       // use numeric sort of % and lexicographic for everything else
+    //       dataView.fastSort((sortcol == "percentComplete") ? percentCompleteValueFn : sortcol, args.sortAsc);
+    //   } else {
+    //       // using native sort with comparer
+    //       // preferred method but can be very slow in IE with huge datasets
+    //       dataView.sort(comparer, args.sortAsc);
+    //   }
+    // });
     // wire up model events to drive the grid
     // !! both dataView.onRowCountChanged and dataView.onRowsChanged MUST be wired to correctly update the grid
     // see Issue#91
     dataView.onRowCountChanged.subscribe(function (e, args) {
-    grid.updateRowCount();
-    grid.render();
+      grid.updateRowCount();
+      grid.render();
     });
 
     dataView.onRowsChanged.subscribe(function (e, args) {
-    grid.invalidateRows(args.rows);
-    grid.render();
+      grid.invalidateRows(args.rows);
+      grid.render();
     });
     dataView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
-    grid.updatePagingStatusFromView( pagingInfo );
+      grid.updatePagingStatusFromView( pagingInfo );
     });
     var h_runfilters = null;
     // wire up the slider to apply the filter to the model
-    $("#pcSlider,#pcSlider2").slider({
-    "range": "min",
-    "slide": function (event, ui) {
-        Slick.GlobalEditorLock.cancelCurrentEdit();
-        if (percentCompleteThreshold != ui.value) {
-        window.clearTimeout(h_runfilters);
-        h_runfilters = window.setTimeout(updateFilter, 10);
-        percentCompleteThreshold = ui.value;
-        }
-    }
-    });
+    // $("#pcSlider,#pcSlider2").slider({
+    //   "range": "min",
+    //   "slide": function (event, ui) {
+    //       Slick.GlobalEditorLock.cancelCurrentEdit();
+    //       if (percentCompleteThreshold != ui.value) {
+    //       window.clearTimeout(h_runfilters);
+    //       h_runfilters = window.setTimeout(updateFilter, 10);
+    //       percentCompleteThreshold = ui.value;
+    //       }
+    //   }
+    // });
 
     // wire up the search textbox to apply the filter to the model
-    $("#txtSearch,#txtSearch2").keyup(function (e) {
-    Slick.GlobalEditorLock.cancelCurrentEdit();
-    // clear on Esc
-    if (e.which == 27) {
-        this.value = "";
-    }
-    searchString = this.value;
-    updateFilter();
-    });
-    function updateFilter() {
-    dataView.setFilterArgs({
-        percentCompleteThreshold: percentCompleteThreshold,
-        searchString: searchString
-    });
+    // $("#txtSearch,#txtSearch2").keyup(function (e) {
+    //   Slick.GlobalEditorLock.cancelCurrentEdit();
+    //   // clear on Esc
+    //   if (e.which == 27) {
+    //       this.value = "";
+    //   }
+    //   searchString = this.value;
+    //   //updateFilter();
+    // });
+    // function updateFilter() {
+    //   dataView.setFilterArgs({
+    //       percentCompleteThreshold: percentCompleteThreshold,
+    //       searchString: searchString
+    // });
     dataView.refresh();
-    }
+    //}
     $("#btnSelectRows").click(function () {
-    if (!Slick.GlobalEditorLock.commitCurrentEdit()) {
-        return;
+      if (!Slick.GlobalEditorLock.commitCurrentEdit()) {
+          return;
     }
     var rows = [];
     for (var i = 0; i < 10 && i < dataView.getLength(); i++) {
@@ -202,11 +202,11 @@ function display_grid(data,cols){
     // initialize the model after all the events have been hooked up
     dataView.beginUpdate();
     dataView.setItems(data);
-    dataView.setFilterArgs({
-    percentCompleteThreshold: percentCompleteThreshold,
-    searchString: searchString
-    });
-    dataView.setFilter(myFilter);
+    // dataView.setFilterArgs({
+    // percentCompleteThreshold: percentCompleteThreshold,
+    // searchString: searchString
+    // });
+    // dataView.setFilter(myFilter);
     dataView.endUpdate();
     // if you don't want the items that are not visible (due to being filtered out
     // or being on a different page) to stay selected, pass 'false' to the second arg
