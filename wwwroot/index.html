@@ -43,15 +43,15 @@
     <script>
         // Define a very simple JavaScript function that just prints
         // the input parameter to the browser's console
-        window.init = () => {
+        window.init = (data,cols) => {
             console.log('init'+$("#myGrid").html());
-            display_grid();
+            display_grid(data,cols);
             init2();
             console.log('done');
             return true;
         };
-        window.log = (data) => {
-            console.dir(data);
+        window.log = (msg) => {
+            console.dir(msg);
             return true;
         };
     </script>    

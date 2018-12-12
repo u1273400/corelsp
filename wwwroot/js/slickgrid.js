@@ -1,7 +1,6 @@
 function isIEPreVer9() { var v = navigator.appVersion.match(/MSIE ([\d.]+)/i); return (v ? v[1] < 9 : false); }
 var dataView;
 var grid;
-var data = [];
 var columns = [
   {id: "sel", name: "#", field: "num", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
   {id: "title", name: "Title", field: "title", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
@@ -38,6 +37,7 @@ function requiredFieldValidator(value) {
     return {valid: true, msg: null};
   }
 }
+
 function myFilter(item, args) {
   if (item["percentComplete"] < args.percentCompleteThreshold) {
     return false;
@@ -65,25 +65,14 @@ $(".grid-header .ui-icon")
         .mouseout(function (e) {
           $(e.target).removeClass("ui-state-hover")
         });
-function display_grid(){
+function display_grid(data,cols){
     // prepare the data
     console.log('diplaying grid..');
-    for (var i = 0; i < 50000; i++) {
-        var d = (data[i] = {});
-        d["id"] = "id_" + i;
-        d["num"] = i;
-        d["title"] = "Task " + i;
-        d["duration"] = "5 days";
-        d["percentComplete"] = Math.round(Math.random() * 100);
-        d["start"] = "01/01/2009";
-        d["finish"] = "01/05/2009";
-        d["effortDriven"] = (i % 5 == 0);
-        }
         console.log('whats goin on..');
         dataView = new Slick.Data.DataView({ inlineFilters: true });
-        console.log('debug here -2..');
+        console.dir(data);
         grid = new Slick.Grid("#myGrid", dataView, columns, options);
-        console.log('debug here -1..');
+        console.dir(cols);
         grid.setSelectionModel(new Slick.RowSelectionModel());
         var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
         var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
@@ -93,8 +82,9 @@ function display_grid(){
             .appendTo(grid.getTopPanel())
             .show();
         grid.onCellChange.subscribe(function (e, args) {
-        dataView.updateItem(args.item.id, args.item);
+          dataView.updateItem(args.item.id, args.item);
         });
+        console.log('debug here 01..'+data.length);
         grid.onAddNewRow.subscribe(function (e, args) {
         var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
         $.extend(item, args.item);
@@ -115,7 +105,6 @@ function display_grid(){
         grid.onSort.subscribe(function (e, args) {
         sortdir = args.sortAsc ? 1 : -1;
         sortcol = args.sortCol.field;
-        console.log('debug here 01..');
         if (isIEPreVer9()) {
             // using temporary Object.prototype.toString override
             // more limited and does lexicographic sort only by default, but can be much faster
@@ -144,7 +133,7 @@ function display_grid(){
         grid.updateRowCount();
         grid.render();
         });
-        console.log('debug here 02..');
+
         dataView.onRowsChanged.subscribe(function (e, args) {
         grid.invalidateRows(args.rows);
         grid.render();
@@ -165,7 +154,7 @@ function display_grid(){
             }
         }
         });
-        console.log('not done yet?..');
+
         // wire up the search textbox to apply the filter to the model
         $("#txtSearch,#txtSearch2").keyup(function (e) {
         Slick.GlobalEditorLock.cancelCurrentEdit();

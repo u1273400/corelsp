@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace lsp
+namespace corelsp
 {
     public class Startup
     {
@@ -11,7 +11,7 @@ namespace lsp
 
         public void Configure(IBlazorApplicationBuilder app)
         {
-            app.AddComponent<App>("app");     
+            app.AddComponent<App>("app");            
         }
     }
 }

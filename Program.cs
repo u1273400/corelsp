@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace lsp
+namespace corelsp
 {
     public class Program
     {
