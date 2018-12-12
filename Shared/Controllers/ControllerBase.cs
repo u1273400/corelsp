@@ -25,7 +25,7 @@ namespace corelsp.Shared.Controllers
                 d[i].start = "01/01/2009";
                 d[i].finish = "01/05/2009";
                 d[i].effortDriven = (i % 5 == 0);
-                if((i+1) % 10000==0)log($"populating ..{(i+1)*1.0/d.Length*100}% complete");
+                if((i+1) % 25000==0)log($"populating ..{(i+1)*1.0/d.Length*100}% complete");
             }
             return d;   
         }
