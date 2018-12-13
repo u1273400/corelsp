@@ -87,7 +87,7 @@ $(".grid-header .ui-icon")
         });
 function display_grid(data,cols){
     // prepare the data
-    console.log('processing cols..');
+    console.log('processing cols..'+data.length);
     columns=processCols(cols);
     dataView = new Slick.Data.DataView({ inlineFilters: true });
     grid = new Slick.Grid("#myGrid", dataView, columns, options);

@@ -90,7 +90,9 @@
         // Simulate async initialization work
         await Task.Delay(1000);
         buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
-        await init(buildings.Take(10).ToList(),bldcols);
+        var bldgs=buildings.Where(c=>c.tableDate.Equals("2012-9-30")).ToArray();
+        await log(bldgs);
+        await init(bldgs,bldcols);
 
     }/*
     protected override void OnInit()
@@ -117,18 +119,17 @@
     };*/
     class Building
     {
-        public long BuildingId { get; set; }
+        public long Id { get; set; }
         public string BuildingRef { get; set; }
         public string BuildingName { get; set; }
-        public DateTime tableDate { get; set; }
+        public string tableDate { get; set; }
     }
     
     object[] bldcols = new object[]{
-        new{id= "sel", name= "#", field= "num", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable= false },
-        new{id= "BuildingRef", name= "Bldg Ref", field= "BuildingRef", selectable= false, minWidth= 60},
-        new{id= "BuildingName", name= "Building Name", field= "BuildingName", width= 120, minWidth= 120,  selectable= false},
-        new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 60, editor= "Slick.Editors.Date", selectable= false},
-        new{id= "id", name= "Id", field= "BuildingId", width= 40, cannotTriggerInsert= true,  selectable= false }
+        new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable= false },
+        new{id= "buildingRef", name= "Bldg Ref", field= "buildingRef", selectable= false, minWidth= 60},
+        new{id= "buildingName", name= "Building Name", field= "buildingName", width= 150, minWidth= 180, selectable= false},
+        new{id= "tableDate", name= "Table Date", field= "tableDate", minWidth= 100, selectable= false}
     };
   
 }
