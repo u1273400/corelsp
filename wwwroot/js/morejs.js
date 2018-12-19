@@ -1,4 +1,4 @@
-function init2(){
+function init2(arr){
     $('#datetimepicker1').datetimepicker();
     // $('#ex1Slider').bootstrapSlider({
     //     formatter: function(value) {
@@ -7,11 +7,12 @@ function init2(){
     // });
     var handle = $( "#custom-handle" );
     $( "#slider" ).slider({
+      max: arr.length,
       create: function() {
-        handle.text( $( this ).slider( "value" ) );
+        handle.text( arr[$( this ).slider( "value" )] );
       },
       slide: function( event, ui ) {
-        handle.text( ui.value );
+        handle.text( arr[ui.value] );
       }
     });
   

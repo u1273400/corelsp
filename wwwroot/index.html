@@ -9,7 +9,7 @@
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
     <link href="node_modules/bootstrap-slider/dist/css/bootstrap-slider.css" rel="stylesheet" />
-    <!--<link href="css/gridplus.css" rel="stylesheet" />-->
+    <link href="css/gridplus2.css" rel="stylesheet" />
     <link href="SlickGrid-master/slick.grid.css" rel="stylesheet" type="text/css" />
     <link href="SlickGrid-master/controls/slick.pager.css" rel="stylesheet" type="text/css" />
     <link href="SlickGrid-master/controls/slick.columnpicker.css" rel="stylesheet" type="text/css" />
@@ -43,10 +43,10 @@
     <script>
         // Define a very simple JavaScript function that just prints
         // the input parameter to the browser's console
-        window.init = (data,cols) => {
+        window.init = (data,cols,marr) => {
             //console.log('init'+$("#myGrid").html());
             display_grid(data,cols);
-            init2();
+            init2(marr);
             return true;
         };
         window.log = (msg) => {
