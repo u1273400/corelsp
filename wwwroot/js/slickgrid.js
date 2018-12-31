@@ -23,14 +23,7 @@ function processCols(cols){
 }
 
 var columns = []
-//   {id: "sel", name: "#", field: "num", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
-//   {id: "title", name: "Title", field: "title", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
-//   {id: "duration", name: "Duration", field: "duration", editor: Slick.Editors.Text, sortable: true},
-//   {id: "%", defaultSortAsc: false, name: "% Complete", field: "percentComplete", width: 80, resizable: false, formatter: Slick.Formatters.PercentCompleteBar, editor: Slick.Editors.PercentComplete, sortable: true},
-//   {id: "start", name: "Start", field: "start", minWidth: 60, editor: Slick.Editors.Date, sortable: true},
-//   {id: "finish", name: "Finish", field: "finish", minWidth: 60, editor: Slick.Editors.Date, sortable: true},
-//   {id: "effort-driven", name: "Effort Driven", width: 80, minWidth: 20, maxWidth: 80, cssClass: "cell-effort-driven", field: "effortDriven", formatter: Slick.Formatters.Checkbox, editor: Slick.Editors.Checkbox, cannotTriggerInsert: true, sortable: true}
-// ];
+
 var options = {
   columnPicker: {
     columnTitle: "Columns",
@@ -118,34 +111,20 @@ function display_grid(data,cols){
       grid.setSelectedRows(rows);
         e.preventDefault();
     });
+    grid.onClick.subscribe(function (e) {
+      var cell = grid.getCellFromEvent(e);
+      console.dir(data[cell.row].id);
+      // if (grid.getColumns()[cell.cell].id == "priority") {
+      //   if (!grid.getEditorLock().commitCurrentEdit()) {
+      //     return;
+      //   }
+      //   var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
+      //   data[cell.row].priority = states[data[cell.row].priority];
+      //   grid.updateRow(cell.row);
+      //   e.stopPropagation();
+      // }
+    });
 
-    // grid.onSort.subscribe(function (e, args) {
-    //   sortdir = args.sortAsc ? 1 : -1;
-    //   sortcol = args.sortCol.field;
-    //   if (isIEPreVer9()) {
-    //       // using temporary Object.prototype.toString override
-    //       // more limited and does lexicographic sort only by default, but can be much faster
-    //       var percentCompleteValueFn = function () {
-    //       var val = this["percentComplete"];
-    //       if (val < 10) {
-    //           return "00" + val;
-    //       } else if (val < 100) {
-    //           return "0" + val;
-    //       } else {
-    //           return val;
-    //       }
-    //       };
-    //       // use numeric sort of % and lexicographic for everything else
-    //       dataView.fastSort((sortcol == "percentComplete") ? percentCompleteValueFn : sortcol, args.sortAsc);
-    //   } else {
-    //       // using native sort with comparer
-    //       // preferred method but can be very slow in IE with huge datasets
-    //       dataView.sort(comparer, args.sortAsc);
-    //   }
-    // });
-    // wire up model events to drive the grid
-    // !! both dataView.onRowCountChanged and dataView.onRowsChanged MUST be wired to correctly update the grid
-    // see Issue#91
     dataView.onRowCountChanged.subscribe(function (e, args) {
       grid.updateRowCount();
       grid.render();

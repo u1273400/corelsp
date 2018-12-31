@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Blazor.Components;
 
 namespace corelsp.Shared.Models
 {
-    public class Building
+    public class Floor
     {
-        public static Building[] Buildings;
-        public static string CMonth { get; set; } = "2012-9-30";
+        public static Floor[] Floors;
+        public static string CBId { get; set; } = "2";
 
         public static object[] bldcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
@@ -19,15 +19,15 @@ namespace corelsp.Shared.Models
         };
 
         public long Id { get; set; }
-        public string BuildingRef { get; set; }
-        public string BuildingName { get; set; }
+        public string FloorName { get; set; }
+        public double GIA { get; set; }
         public DateTime tableDate { get; set; }
 
-        public static string[] Months(){
-            return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
-        }
+        // public static string[] Months(){
+        //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
+        // }
 
-        public static Building[] Monthly(string monthend){
+        public static Building[] FromBuilding(string bid){
             return Buildings.Where(c=>c.tableDate==DateTime.Parse(monthend)).ToArray();
         }
 
