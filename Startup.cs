@@ -11,7 +11,7 @@ namespace corelsp
 
         public void Configure(IBlazorApplicationBuilder app)
         {
-            app.AddComponent<App>("app");                             
+            app.AddComponent<App>("app");                              
         }
     }
 }

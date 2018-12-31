@@ -12,7 +12,7 @@ namespace corelsp.Shared.Controllers
             return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
         }
         protected async Task<bool> init(object[] data,object[] cols, string[] months){
-            return await JSRuntime.Current.InvokeAsync<bool>("init",data,cols,months);
+            return await Building.Init(data,cols,months);
         }
         protected object[] testdata(){
             return TestData.populate();   
