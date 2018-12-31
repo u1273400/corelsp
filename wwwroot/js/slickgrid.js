@@ -23,7 +23,6 @@ function processCols(cols){
 }
 
 var columns = []
-
 var options = {
   columnPicker: {
     columnTitle: "Columns",
