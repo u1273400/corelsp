@@ -76,7 +76,6 @@
 
 @functions {
     int currentCount = 0;
-
     void IncrementCount()
     {
         currentCount++; 
@@ -90,10 +89,11 @@
         // Simulate async initialization work
         await Task.Delay(1000);
         Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
-        var bldgs=Building.Monthly("2012-9-30");
+        var bldgs=Building.Monthly(Building.CMonth);
         await log(bldgs);
-        await init(bldgs,bldcols,Building.Months());
+        await init(bldgs,Building.bldcols,Building.Months());
 
+        
     }/*
     protected override void OnInit()
     {
@@ -106,11 +106,5 @@
         log("Params set");
         //poptestdata();
     }*/
-    object[] bldcols = new object[]{
-        new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable= false },
-        new{id= "buildingRef", name= "Bldg Ref", field= "buildingRef", selectable= false, minWidth= 60},
-        new{id= "buildingName", name= "Building Name", field= "buildingName", width= 150, minWidth= 180, selectable= false},
-        new{id= "tableDate", name= "Table Date", field= "tableDate", minWidth= 100, selectable= false}
-    };
   
 }
