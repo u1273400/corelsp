@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Blazor.Components;
 
 namespace corelsp.Shared.Models
 {
-    public class Building
+    public class Building: AppBase
     {
         public static Building[] Buildings;
         public static string CMonth { get; set; } = "2012-9-30";
