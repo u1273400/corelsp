@@ -4,14 +4,14 @@
     </target>
     <target name="compile" description="Compile code">
     </target>
-    <target name="dist" depends="sed" description="Build distributable">
-      <scp todir="u1273400:k_-_monger@selene.hud.ac.uk:/stud/u1273400/tmp/dbclass/dist/">
-        <fileset dir="publishable/BlazorApp1/dist"/>
+    <target name="dist" depends="publish" description="Build distributable">
+      <scp todir="paisja:mar07ja@webdev.hud.ac.uk:/lsp/public/corelsp/">
+        <fileset dir="publishable/corelsp/dist"/>
       </scp>
     </target>
-    <target name="down" depends="compile" description="Build distributable">
+    <!-- <target name="down" depends="compile" description="Build distributable">
       <scp file="john:k_-_monger@gaia.hud.ac.uk:/home/john/Dropbox/rtmp/src/cs/core/wbible/bin/Debug/netcoreapp1.1/wbible.db" todir="../wbiblecore" trust="true"/>
-    </target>
+    </target> -->
     <target name="publish" depends="compile" description="Build distributable">
       <exec executable="dotnet">
         <arg value="publish"/>
@@ -29,7 +29,7 @@
     <exec executable="sed">
       <arg value="-i"/>
       <arg value="'s/^    \&lt;base href=\&quot;\//    \&lt;base href=\&quot;\/u1273400\/tmp\/dbclass\/dist\//'"/>
-      <arg value="publishable/BlazorApp1/dist/index.html"/>
+      <arg value="publishable/corelsp/dist/index.html"/>
     </exec>
   </target>
 </project>
