@@ -101,8 +101,11 @@
     {
         // Simulate async initialization work
         await Task.Delay(1000);
+        log("Pages/Index.cshtml: Retreiving buildings.json");
         Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
+        log("Pages/Index.cshtml: Retreiving floors.json");
         Floor.Floors = await Http.GetJsonAsync<Floor[]>("sample-data/floors.json");
+        log("Pages/Index.cshtml: Retreiving spaces2.json");
         Space.Spaces = await Http.GetJsonAsync<Space[]>("sample-data/spaces2.json");
         await init();
     }

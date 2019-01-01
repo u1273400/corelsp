@@ -20,10 +20,10 @@ namespace corelsp.Shared.Models
         };
 
         public long Id { get; set; }
-        public long Label { get; set; }
+        public string Label { get; set; }
         public string Dept { get; set; }
         public long DeptId { get; set; }
-        public string Area { get; set; }
+        public double Area { get; set; }
         public long Floor { get; set; }
         public DateTime tableDate { get; set; }
 

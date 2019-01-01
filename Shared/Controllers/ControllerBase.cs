@@ -15,7 +15,7 @@ namespace corelsp.Shared.Controllers
             return await Building.Init();
         }
         protected object[] testdata(){
-            return TestData.populate();   
+            return TestData.populate();    
         }
     }
 }
