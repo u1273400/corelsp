@@ -38,6 +38,7 @@
     <script src="SlickGrid-master/controls/slick.columnpicker.js"></script>
     
     <script src="js/slickgrid.js"></script>
+    <script src="js/floorgrid.js"></script>
     <script src="js/morejs.js"></script>
     <script type="blazor-boot"></script>
     <script>
@@ -47,6 +48,10 @@
             //console.log('init'+$("#myGrid").html());
             display_grid(data,cols);
             init2(marr);
+            return true;
+        };
+        window.initflrs = (data,cols) => {
+            display_flr_grid(data,cols);
             return true;
         };
         window.log = (msg) => {

@@ -6,21 +6,23 @@ using Microsoft.AspNetCore.Blazor.Components;
 
 namespace corelsp.Shared.Models
 {
-    public class Floor: AppBase
+    public class Space: AppBase
     {
-        public static Floor[] Floors;
+        public static Space[] Spaces;
         public static long CBId { get; set; } = 2;
 
-        public static object[] flrcols = new object[]{
+        public static object[] spcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
             new{id= "floorName", name= "Floor ref", field= "floorName", width= 80, minWidth= 80, selectable= false},
             new{id= "gIA", name= "GIA", field= "gIA", minWidth= 100, selectable= false}
         };
 
         public long Id { get; set; }
-        public long BuildingId { get; set; }
-        public string FloorName { get; set; }
-        public double GIA { get; set; }
+        public long Label { get; set; }
+        public string Dept { get; set; }
+        public long DeptId { get; set; }
+        public string Area { get; set; }
+        public long Floor { get; set; }
         public DateTime tableDate { get; set; }
 
         // public static string[] Months(){

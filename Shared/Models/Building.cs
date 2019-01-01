@@ -9,7 +9,7 @@ namespace corelsp.Shared.Models
     public class Building: AppBase
     {
         public static Building[] Buildings;
-        public static string CMonth { get; set; } = "2012-9-30";
+        public static string CMonth { get; set; } = "2012-01-31";
 
         public static object[] bldcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
@@ -41,11 +41,11 @@ namespace corelsp.Shared.Models
         public static async Task<bool> log(object msg){
             return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
         }
-        public static async Task<bool> Init(object[] data,object[] cols, string[] months){
-            return await JSRuntime.Current.InvokeAsync<bool>("init",data,cols,months);
-        }
         public static async Task<bool> Init(){
-            return await JSRuntime.Current.InvokeAsync<bool>("init",Monthly(CMonth),bldcols,Months());
+            var bldgs = Monthly(CMonth);
+            Floor.CBId=bldgs[0].Id;
+            await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
+            return await Floor.Init();
         }
     }
     
