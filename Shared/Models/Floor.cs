@@ -39,11 +39,8 @@ namespace corelsp.Shared.Models
             Init();
             return String.Empty;
         }
-        public static async Task<bool> Init(object[] data,object[] cols){
-            return await JSRuntime.Current.InvokeAsync<bool>("init",data,cols);
-        }
         public static async Task<bool> Init(){
-            return await JSRuntime.Current.InvokeAsync<bool>("init",FromBuilding(),flrcols);
+            return await JSRuntime.Current.InvokeAsync<bool>("initflrs",FromBuilding(),flrcols);
         }
     }
     

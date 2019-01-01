@@ -11,8 +11,8 @@ namespace corelsp.Shared.Controllers
         protected async Task<bool> log(object msg){
             return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
         }
-        protected async Task<bool> init(object[] data,object[] cols, string[] months){
-            return await Building.Init(data,cols,months);
+        protected async Task<bool> init(){
+            return await Building.Init();
         }
         protected object[] testdata(){
             return TestData.populate();   
