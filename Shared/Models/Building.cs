@@ -41,8 +41,11 @@ namespace corelsp.Shared.Models
         public static async Task<bool> Init(){
             var bldgs = Monthly(CMonth);
             Floor.CBId=bldgs[0].Id;
+            log("Building::Init: Initialising buildings.."); 
             await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
+            log("Building::Init: Initialising floors..");
             await Floor.Init();
+            log("Building::Init: Initialising spaces..");
             Space.CFId=Floor.CFloors[0].Id;
             return await Space.Init();
         }

@@ -31,7 +31,8 @@ namespace corelsp.Shared.Models
         //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
         // }
 
-        public static Space[] FromFloor(){
+        public static async Task<Space[]> FromFloor(){
+            await log($" Spaces::FromFloor: CFId={CFId}");
             return Spaces.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.Floor==CFId).ToArray();
         }
 
