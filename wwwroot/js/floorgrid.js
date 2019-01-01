@@ -3,8 +3,8 @@ var flrView;
 var floor_grid;
 
 function display_flr_grid(data,cols){
-    // prepare the data
-    columns=processCols(cols);
+  console.dir("processing floors..")
+  columns=processCols(cols);
     flrView = new Slick.Data.DataView({ inlineFilters: true });
     floor_grid = new Slick.Grid("#flrGrid", flrView, columns, options);
     floor_grid.setSelectionModel(new Slick.RowSelectionModel());
