@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="build" default="cleanup">
+    <target name="clean" description="Delete generated files">
+    </target>
+    <target name="compile" description="Compile code">
+    </target>
+    <target name="dist" depends="publish" description="Build distributable">
+      <scp todir="paisja:mar07ja@webdev.hud.ac.uk:/lsp/public/corelsp/">
+        <fileset dir="publishable/corelsp/dist"/>
+      </scp>
+    </target>
+    <!-- <target name="down" depends="compile" description="Build distributable">
+      <scp file="john:k_-_monger@gaia.hud.ac.uk:/home/john/Dropbox/rtmp/src/cs/core/wbible/bin/Debug/netcoreapp1.1/wbible.db" todir="../wbiblecore" trust="true"/>
+    </target> -->
+    <target name="publish" depends="compile" description="Build distributable">
+      <exec executable="dotnet">
+        <arg value="publish"/>
+        <arg value="-o"/>
+        <arg value="publishable"/>
+      </exec>
+    </target>
+  <target name="cleanup" depends="dist">
+    <exec executable="rm">
+      <arg value="-r"/>
+      <arg value="publishable"/>
+    </exec>
+  </target>
+  <target name="sed" depends="compile">
+    <exec executable="sed">
+      <arg value="-i"/>
+      <arg value="'s/^    \&lt;base href=\&quot;\//    \&lt;base href=\&quot;\/u1273400\/tmp\/dbclass\/dist\//'"/>
+      <arg value="publishable/corelsp/dist/index.html"/>
+    </exec>
+  </target>
+</project>
