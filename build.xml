@@ -5,7 +5,7 @@
     <target name="compile" description="Compile code">
     </target>
     <target name="dist" depends="publish" description="Build distributable">
-      <scp todir="paisja:mar07ja@webdev.hud.ac.uk:/lsp/public/corelsp/">
+      <scp todir="paisja:mar07ja@webdev.hud.ac.uk:/home/paisja/lsp/public/corelsp/">
         <fileset dir="publishable/corelsp/dist"/>
       </scp>
     </target>
