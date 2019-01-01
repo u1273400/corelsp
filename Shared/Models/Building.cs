@@ -38,14 +38,13 @@ namespace corelsp.Shared.Models
             Init();
             return Task.FromResult(String.Empty);
         }
-        public static async Task<bool> log(object msg){
-            return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
-        }
         public static async Task<bool> Init(){
             var bldgs = Monthly(CMonth);
             Floor.CBId=bldgs[0].Id;
             await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
-            return await Floor.Init();
+            await Floor.Init();
+            Space.CFId=Floor.CFloors[0].Id;
+            return await Space.Init();
         }
     }
     

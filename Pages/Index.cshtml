@@ -73,6 +73,10 @@
                     <div id="flrGrid" style="width:100%;height:200px;"></div>
                     <div id="flrPager" style="width:100%;height:20px;"></div> 
                 </div>  
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="spcGrid" style="width:100%;height:200px;"></div>
+                    <div id="spcPager" style="width:100%;height:20px;"></div> 
+                </div>  
             </div>  
            </div>
             <div id="batman" class="tab-pane fade">
@@ -99,6 +103,7 @@
         await Task.Delay(1000);
         Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
         Floor.Floors = await Http.GetJsonAsync<Floor[]>("sample-data/floors.json");
+        Space.Spaces = await Http.GetJsonAsync<Space[]>("sample-data/spaces.json");
         await init();
     }
     /*

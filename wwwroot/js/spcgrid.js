@@ -1,64 +1,63 @@
-function isIEPreVer9() { var v = navigator.appVersion.match(/MSIE ([\d.]+)/i); return (v ? v[1] < 9 : false); }
-var flrView;
-var floor_grid;
+var spcView;
+var spc_grid;
 
-function display_flr_grid(data,cols){
+function display_spc_grid(data,cols){
     // prepare the data
     columns=processCols(cols);
-    flrView = new Slick.Data.DataView({ inlineFilters: true });
-    floor_grid = new Slick.Grid("#flrGrid", flrView, columns, options);
-    floor_grid.setSelectionModel(new Slick.RowSelectionModel());
-    var pager = new Slick.Controls.Pager(flrView, floor_grid, $("#flrPager"));
-    var columnpicker = new Slick.Controls.ColumnPicker(columns, floor_grid, options);
-    // move the filter panel defined in a hidden div into floor_grid top panel
+    spcView = new Slick.Data.DataView({ inlineFilters: true });
+    spc_grid = new Slick.Grid("#spcGrid", spcView, columns, options);
+    spc_grid.setSelectionModel(new Slick.RowSelectionModel());
+    var pager = new Slick.Controls.Pager(spcView, spc_grid, $("#spcPager"));
+    var columnpicker = new Slick.Controls.ColumnPicker(columns, spc_grid, options);
+    // move the filter panel defined in a hidden div into spc_grid top panel
     $("#inlineFilterPanel")
-        .appendTo(floor_grid.getTopPanel())
+        .appendTo(spc_grid.getTopPanel())
         .show();
-    floor_grid.onCellChange.subscribe(function (e, args) {
-      flrView.updateItem(args.item.id, args.item);
+    spc_grid.onCellChange.subscribe(function (e, args) {
+      spcView.updateItem(args.item.id, args.item);
     });
-    floor_grid.onAddNewRow.subscribe(function (e, args) {
+    spc_grid.onAddNewRow.subscribe(function (e, args) {
       var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
       $.extend(item, args.item);
-      flrView.addItem(item);
+      spcView.addItem(item);
     });
-    floor_grid.onKeyDown.subscribe(function (e) {
+    spc_grid.onKeyDown.subscribe(function (e) {
       // select all rows on ctrl-a
       if (e.which != 65 || !e.ctrlKey) {
           return false;
       }
       var rows = [];
-      for (var i = 0; i < flrView.getLength(); i++) {
+      for (var i = 0; i < spcView.getLength(); i++) {
           rows.push(i);
       }
-      floor_grid.setSelectedRows(rows);
+      spc_grid.setSelectedRows(rows);
         e.preventDefault();
     });
-    floor_grid.onClick.subscribe(function (e) {
-      var cell = floor_grid.getCellFromEvent(e);
+    spc_grid.onClick.subscribe(function (e) {
+      var cell = spc_grid.getCellFromEvent(e);
       console.dir(data[cell.row].id);
-      // if (floor_grid.getColumns()[cell.cell].id == "priority") {
-      //   if (!floor_grid.getEditorLock().commitCurrentEdit()) {
+      // if (spc_grid.getColumns()[cell.cell].id == "priority") {
+      //   if (!spc_grid.getEditorLock().commitCurrentEdit()) {
       //     return;
       //   }
       //   var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
       //   data[cell.row].priority = states[data[cell.row].priority];
-      //   floor_grid.updateRow(cell.row);
+      //   spc_grid.updateRow(cell.row);
       //   e.stopPropagation();
       // }
     });
 
-    flrView.onRowCountChanged.subscribe(function (e, args) {
-      floor_grid.updateRowCount();
-      floor_grid.render();
+    spcView.onRowCountChanged.subscribe(function (e, args) {
+      spc_grid.updateRowCount();
+      spc_grid.render();
     });
 
-    flrView.onRowsChanged.subscribe(function (e, args) {
-      floor_grid.invalidateRows(args.rows);
-      floor_grid.render();
+    spcView.onRowsChanged.subscribe(function (e, args) {
+      spc_grid.invalidateRows(args.rows);
+      spc_grid.render();
     });
-    flrView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
-      floor_grid.updatePagingStatusFromView( pagingInfo );
+    spcView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
+      spc_grid.updatePagingStatusFromView( pagingInfo );
     });
     var h_runfilters = null;
     // wire up the slider to apply the filter to the model
@@ -85,33 +84,33 @@ function display_flr_grid(data,cols){
     //   //updateFilter();
     // });
     // function updateFilter() {
-    //   flrView.setFilterArgs({
+    //   spcView.setFilterArgs({
     //       percentCompleteThreshold: percentCompleteThreshold,
     //       searchString: searchString
     // });
-    flrView.refresh();
+    spcView.refresh();
     //}
     $("#btnSelectRows").click(function () {
       if (!Slick.GlobalEditorLock.commitCurrentEdit()) {
           return;
     }
     var rows = [];
-    for (var i = 0; i < 10 && i < flrView.getLength(); i++) {
+    for (var i = 0; i < 10 && i < spcView.getLength(); i++) {
         rows.push(i);
     }
-    floor_grid.setSelectedRows(rows);
+    spc_grid.setSelectedRows(rows);
     });
     // initialize the model after all the events have been hooked up
-    flrView.beginUpdate();
-    flrView.setItems(data);
-    // flrView.setFilterArgs({
+    spcView.beginUpdate();
+    spcView.setItems(data);
+    // spcView.setFilterArgs({
     // percentCompleteThreshold: percentCompleteThreshold,
     // searchString: searchString
     // });
-    // flrView.setFilter(myFilter);
-    flrView.endUpdate();
+    // spcView.setFilter(myFilter);
+    spcView.endUpdate();
     // if you don't want the items that are not visible (due to being filtered out
     // or being on a different page) to stay selected, pass 'false' to the second arg
-    flrView.syncGridSelection(floor_grid, true);
+    spcView.syncGridSelection(spc_grid, true);
     $("#gridContainer").resizable();
 }

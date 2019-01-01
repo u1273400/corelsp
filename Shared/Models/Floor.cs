@@ -9,6 +9,7 @@ namespace corelsp.Shared.Models
     public class Floor: AppBase
     {
         public static Floor[] Floors;
+        public static Floor[] CFloors;
         public static long CBId { get; set; } = 2;
 
         public static object[] flrcols = new object[]{
@@ -28,7 +29,8 @@ namespace corelsp.Shared.Models
         // }
 
         public static Floor[] FromBuilding(){
-            return Floors.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.BuildingId==CBId).ToArray();
+            CFloors=Floors.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.BuildingId==CBId).ToArray();
+            return CFloors;
         }
 
         [JSInvokable]
