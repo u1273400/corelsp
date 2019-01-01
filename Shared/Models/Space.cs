@@ -9,6 +9,7 @@ namespace corelsp.Shared.Models
     public class Space: AppBase
     {
         public static Space[] Spaces;
+        public static Space[] CSpaces;
         public static long CFId { get; set; } 
 
         public static object[] spcols = new object[]{
@@ -32,8 +33,9 @@ namespace corelsp.Shared.Models
         // }
 
         public static async Task<Space[]> FromFloor(){
-            await log($" Spaces::FromFloor: CFId={CFId}");
-            return Spaces.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.Floor==CFId).ToArray();
+            await log($" Spaces::FromFloor: CFId={CFId} CMonth={Building.CMonth}");
+            CSpaces=Spaces.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.Floor==CFId).ToArray();
+            return CSpaces;
         }
 
         [JSInvokable]
@@ -44,7 +46,9 @@ namespace corelsp.Shared.Models
             return String.Empty;
         }
         public static async Task<bool> Init(){
-            return await JSRuntime.Current.InvokeAsync<bool>("initspaces",FromFloor(),spcols);
+            FromFloor();
+            await log($"Space::Init: Cspaces={CSpaces.Length}");
+            return await JSRuntime.Current.InvokeAsync<bool>("initspaces",CSpaces,spcols);
         }
     }
     
