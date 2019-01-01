@@ -103,7 +103,7 @@
         await Task.Delay(1000);
         Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
         Floor.Floors = await Http.GetJsonAsync<Floor[]>("sample-data/floors.json");
-        Space.Spaces = await Http.GetJsonAsync<Space[]>("sample-data/spaces.json");
+        Space.Spaces = await Http.GetJsonAsync<Space[]>("sample-data/spaces2.json");
         await init();
     }
     /*
