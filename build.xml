@@ -33,7 +33,7 @@
   <target name="sed" depends="compile">
     <exec executable="sed">
       <arg value="-i"/>
-      <arg value="'s/^    \&lt;base href=\&quot;\//    \&lt;base href=\&quot;\/u1273400\/tmp\/dbclass\/dist\//'"/>
+      <arg value="'s/^    \&lt;base href=\&quot;\//    \&lt;base href=\&quot;\/corelsp\//'"/>
       <arg value="publishable/corelsp/dist/index.html"/>
     </exec>
   </target>
