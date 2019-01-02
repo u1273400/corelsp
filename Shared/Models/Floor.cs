@@ -15,13 +15,13 @@ namespace corelsp.Shared.Models
         public static object[] flrcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
             new{id= "floorName", name= "Floor ref", field= "floorName", width= 80, minWidth= 80, selectable= false},
-            new{id= "gIA", name= "GIA", field= "gIA", minWidth= 100, selectable= false}
+            new{id= "gia", name= "GIA", field= "gia", minWidth= 100, selectable= false}
         };
 
         public long Id { get; set; }
         public long BuildingId { get; set; }
         public string FloorName { get; set; }
-        public double GIA { get; set; }
+        public double Gia { get; set; }
         public DateTime tableDate { get; set; }
 
         // public static string[] Months(){
