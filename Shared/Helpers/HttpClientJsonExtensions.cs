@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Components
         {
             await AppBase.log($"HttpClientJsonExtensions::GetJsonAsync: getting floors from {requestUri}");
             var responseJson = await httpClient.GetStringAsync(requestUri);
-            await AppBase.log(responseJson);
+            await AppBase.log($"HttpClientJsonExtensions::GetJsonAsync: here..{responseJson}");
             return Json.Deserialize<T>(responseJson);
         }
 
