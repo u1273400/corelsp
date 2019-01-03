@@ -30,7 +30,6 @@ namespace corelsp.Shared.Models
         // }
 
         public static async Task<Floor[]> FromBuilding(){
-            await log($"Floors::FromBuilding: getting floors from api/flr/{CBId}/{Building.CMonth}");
             return await Http.GetJsonAsync<Floor[]>(new HttpClient(), $"../api/flr/{CBId}/{Building.CMonth}");// as Floor[];
             //CFloors=Floors.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.BuildingId==CBId).ToArray();
         }
