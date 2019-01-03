@@ -21,7 +21,7 @@ namespace Microsoft.AspNetCore.Components
         /// <returns>The response parsed as an object of the generic type.</returns>
         public static async Task<T> GetJsonAsync<T>(this HttpClient httpClient, string requestUri)
         {
-            await AppBase.log($"Floors::FromBuilding: getting floors from {requestUri}");
+            await AppBase.log($"HttpClientJsonExtensions::GetJsonAsync: getting floors from {requestUri}");
             var responseJson = await httpClient.GetStringAsync(requestUri);
             await AppBase.log(responseJson);
             return Json.Deserialize<T>(responseJson);
