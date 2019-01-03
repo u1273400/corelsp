@@ -111,7 +111,7 @@ function display_grid(data,cols){
     });
     grid.onClick.subscribe(function (e) {
       var cell = grid.getCellFromEvent(e);
-      console.dir(data[cell.row].id);
+      console.dir(data[cell.row]);
       // if (grid.getColumns()[cell.cell].id == "priority") {
       //   if (!grid.getEditorLock().commitCurrentEdit()) {
       //     return;
@@ -121,6 +121,15 @@ function display_grid(data,cols){
       //   grid.updateRow(cell.row);
       //   e.stopPropagation();
       // }
+    });
+
+    grid.onDblClick.subscribe(function (e) {
+      var cell = grid.getCellFromEvent(e);
+      var id=data[cell.row].id;
+      window.open(
+        '../admin/building-transactions/'+id,
+        '_blank' // <- This is what makes it open in a new window.
+      );
     });
 
     dataView.onRowCountChanged.subscribe(function (e, args) {

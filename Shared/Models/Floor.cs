@@ -2,13 +2,14 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
-using Microsoft.AspNetCore.Blazor.Components;
+using Http=Microsoft.AspNetCore.Components.HttpClientJsonExtensions;
+using System.Net.Http;
 
 namespace corelsp.Shared.Models
 {
     public class Floor: AppBase
     {
-        public static Floor[] Floors;
+        //public static Floor[] Floors;
         public static Floor[] CFloors;
         public static long CBId { get; set; } = 2;
 
@@ -28,9 +29,10 @@ namespace corelsp.Shared.Models
         //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
         // }
 
-        public static Floor[] FromBuilding(){
-            CFloors=Floors.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.BuildingId==CBId).ToArray();
-            return CFloors;
+        public static async Task<Floor[]> FromBuilding(){
+            await log($"Floors::FromBuilding: getting floors from api/flr/{CBId}/{Building.CMonth}");
+            return await Http.GetJsonAsync<Floor[]>(new HttpClient(), $"../api/flr/{CBId}/{Building.CMonth}");// as Floor[];
+            //CFloors=Floors.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.BuildingId==CBId).ToArray();
         }
 
         [JSInvokable]
@@ -41,7 +43,8 @@ namespace corelsp.Shared.Models
             return String.Empty;
         }
         public static async Task<bool> Init(){
-            return await JSRuntime.Current.InvokeAsync<bool>("initflrs",FromBuilding(),flrcols);
+            CFloors=FromBuilding().Result;
+            return await JSRuntime.Current.InvokeAsync<bool>("initflrs",CFloors,flrcols);
         }
     }
     

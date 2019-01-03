@@ -2,13 +2,14 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
-using Microsoft.AspNetCore.Blazor.Components;
+using Http=Microsoft.AspNetCore.Components.HttpClientJsonExtensions;
+using System.Net.Http;
 
 namespace corelsp.Shared.Models
 {
     public class Space: AppBase
     {
-        public static Space[] Spaces;
+        //public static Space[] Spaces;
         public static Space[] CSpaces;
         public static long CFId { get; set; } 
 
@@ -34,8 +35,8 @@ namespace corelsp.Shared.Models
 
         public static async Task<Space[]> FromFloor(){
             await log($" Spaces::FromFloor: CFId={CFId} CMonth={Building.CMonth}");
-            CSpaces=Spaces.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.Floor==CFId).ToArray();
-            return CSpaces;
+            //CSpaces=Spaces.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.Floor==CFId).ToArray();
+            return await Http.GetJsonAsync<Space[]>(new HttpClient(), $"../api/spr/{CFId}/{Building.CMonth}");
         }
 
         [JSInvokable]
@@ -46,7 +47,7 @@ namespace corelsp.Shared.Models
             return String.Empty;
         }
         public static async Task<bool> Init(){
-            FromFloor();
+            CSpaces=await FromFloor();
             await log($"Space::Init: Cspaces={CSpaces.Length}");
             return await JSRuntime.Current.InvokeAsync<bool>("initspaces",CSpaces,spcols);
         }
