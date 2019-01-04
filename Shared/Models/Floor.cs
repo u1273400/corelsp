@@ -9,7 +9,7 @@ namespace corelsp.Shared.Models
 {
     public class Floor: AppBase
     {
-        //public static Floor[] Floors;
+
         public static Floor[] CFloors;
         public static long CBId { get; set; } = 2;
 
@@ -29,22 +29,28 @@ namespace corelsp.Shared.Models
         //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
         // }
 
-        public static async Task<Floor[]> FromBuilding(){
-            return await Http.GetJsonAsync<Floor[]>(new HttpClient(), $"../api/flr/{CBId}/{Building.CMonth}");// as Floor[];
-            //CFloors=Floors.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.BuildingId==CBId).ToArray();
+        [JSInvokable]
+        public static async Task<bool> SetFloors(string data){
+            //await log($"Floors::SetFloors: data = {data}");
+            CFloors=Json.Deserialize<Floor[]>(data);
+            Init();
+            return true;
         }
 
         [JSInvokable]
         public static async Task<String> SetBuilding(long bid){
             CBId=bid;
-            await log("set building called "+CBId);
+            await log("Floors::SetBuilding: called "+CBId);
             Init();
             return String.Empty;
         }
+
         public static async Task<bool> Init(){
-            CFloors=FromBuilding().Result;
-            return await JSRuntime.Current.InvokeAsync<bool>("initflrs",CFloors,flrcols);
-        }
+            Space.CFId=CFloors[0].Id;
+            await JSRuntime.Current.InvokeAsync<bool>("initflrs",CFloors,flrcols);
+            log($"Floor::Init: Initialising spaces../api/spr/{Space.CFId}/{Building.CMonth}"); 
+            return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
+         }
     }
     
 }

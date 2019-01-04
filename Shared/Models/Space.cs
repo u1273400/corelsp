@@ -9,7 +9,7 @@ namespace corelsp.Shared.Models
 {
     public class Space: AppBase
     {
-        //public static Space[] Spaces;
+
         public static Space[] CSpaces;
         public static long CFId { get; set; } 
 
@@ -33,10 +33,12 @@ namespace corelsp.Shared.Models
         //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
         // }
 
-        public static async Task<Space[]> FromFloor(){
-            await log($" Spaces::FromFloor: CFId={CFId} CMonth={Building.CMonth}");
-            //CSpaces=Spaces.Where(c=>c.tableDate==DateTime.Parse(Building.CMonth)&&c.Floor==CFId).ToArray();
-            return await Http.GetJsonAsync<Space[]>(new HttpClient(), $"../api/spr/{CFId}/{Building.CMonth}");
+        [JSInvokable]
+        public static async Task<bool> SetSpaces(string data){
+            //await log($"Floors::SetFloors: data = {data}");
+            CSpaces=Json.Deserialize<Space[]>(data);
+            Init();
+            return true;
         }
 
         [JSInvokable]
@@ -47,8 +49,7 @@ namespace corelsp.Shared.Models
             return String.Empty;
         }
         public static async Task<bool> Init(){
-            CSpaces=await FromFloor();
-            await log($"Space::Init: Cspaces={CSpaces.Length}");
+            //await log($"Space::Init: Cspaces={CSpaces.Length}");
             return await JSRuntime.Current.InvokeAsync<bool>("initspaces",CSpaces,spcols);
         }
     }

@@ -63,6 +63,18 @@
             console.dir(msg);
             return true;
         };
-    </script>    
+
+        window.initFloors = (url) =>{
+            $.getJSON( url).then(function( data ) {
+                console.dir(data)
+                if(url.includes("spr"))
+                    DotNet.invokeMethodAsync('corelsp', 'SetSpaces', JSON.stringify(data));
+                else
+                    DotNet.invokeMethodAsync('corelsp', 'SetFloors', JSON.stringify(data));
+            }); 
+            return true;
+        };
+
+</script>    
 </body>
 </html>

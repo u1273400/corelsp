@@ -34,10 +34,21 @@ function display_flr_grid(data,cols){
       floor_grid.setSelectedRows(rows);
         e.preventDefault();
     });
+
+    floor_grid.onDblClick.subscribe(function (e) {
+      var cell = floor_grid.getCellFromEvent(e);
+      var id=data[cell.row].id;
+      window.open(
+//        '../admin/building-transactions/'+id,
+//        '_blank' // <- This is what makes it open in a new window.
+      );
+    });
+
     floor_grid.onClick.subscribe(function (e) {
       var cell = floor_grid.getCellFromEvent(e);
-      console.dir(data[cell.row].id);
-      // if (floor_grid.getColumns()[cell.cell].id == "priority") {
+      var id=data[cell.row];
+      DotNet.invokeMethodAsync('corelsp', 'SetFloor', id);
+       // if (floor_grid.getColumns()[cell.cell].id == "priority") {
       //   if (!floor_grid.getEditorLock().commitCurrentEdit()) {
       //     return;
       //   }

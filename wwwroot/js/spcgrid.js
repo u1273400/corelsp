@@ -33,6 +33,16 @@ function display_spc_grid(data,cols){
       spc_grid.setSelectedRows(rows);
         e.preventDefault();
     });
+
+    spc_grid.onDblClick.subscribe(function (e) {
+      var cell = spc_grid.getCellFromEvent(e);
+      var id=data[cell.row].id;
+      window.open(
+//        '../admin/building-transactions/'+id,
+//        '_blank' // <- This is what makes it open in a new window.
+      );
+    });
+
     spc_grid.onClick.subscribe(function (e) {
       var cell = spc_grid.getCellFromEvent(e);
       console.dir(data[cell.row].id);
