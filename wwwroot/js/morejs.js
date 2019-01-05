@@ -17,7 +17,13 @@ function init2(arr){
     },
     slide: function( event, ui ) {
       handle.text( arr[ui.value] );
-      DotNet.invokeMethodAsync('corelsp', 'SetMonth', arr[ui.value]);
+      var rtp=false;
+      setTimeout(function() { 
+        if(rtp){
+          DotNet.invokeMethodAsync('corelsp', 'SetMonth', arr[ui.value])
+        }
+      }, 750)
+      rtp=true;
     }
   });
   

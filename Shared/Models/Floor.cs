@@ -38,19 +38,19 @@ namespace corelsp.Shared.Models
         }
 
         [JSInvokable]
-        public static async Task<String> SetBuilding(long bid){
+        public static async Task<bool> SetBuilding(long bid){
             CBId=bid;
             await log("Floors::SetBuilding: called "+CBId);
-            Init();
-            return String.Empty;
+            return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{CBId}/{Building.CMonth}");
         }
 
         public static async Task<bool> Init(){
+            //if(Space.CFId==null || Space.CFId==0)Space.CFId=CFloors[0].Id;
             Space.CFId=CFloors[0].Id;
             await JSRuntime.Current.InvokeAsync<bool>("initflrs",CFloors,flrcols);
-            log($"Floor::Init: Initialising spaces../api/spr/{Space.CFId}/{Building.CMonth}"); 
+            //log($"Floor::Init: Initialising spaces../api/spr/{Space.CFId}/{Building.CMonth}"); 
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
-         }
+        }
     }
     
 }

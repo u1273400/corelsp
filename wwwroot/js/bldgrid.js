@@ -78,7 +78,6 @@ $(".grid-header .ui-icon")
           $(e.target).removeClass("ui-state-hover")
         });
 function display_grid(data,cols){
-    console.dir("processing buildings..")
     columns=processCols(cols);
     dataView = new Slick.Data.DataView({ inlineFilters: true });
     grid = new Slick.Grid("#myGrid", dataView, columns, options);
@@ -128,7 +127,7 @@ function display_grid(data,cols){
       var cell = grid.getCellFromEvent(e);
       var id=data[cell.row].id;
       window.open(
-        '../admin/building-transactions/'+id,
+        '../admin/building-transactions/resolve/'+id,
         '_blank' // <- This is what makes it open in a new window.
       );
     });

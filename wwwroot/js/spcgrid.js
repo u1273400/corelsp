@@ -2,7 +2,6 @@ var spcView;
 var spc_grid;
 
 function display_spc_grid(data,cols){
-    console.dir("processing spaces..")
     columns=processCols(cols);
     spcView = new Slick.Data.DataView({ inlineFilters: true });
     spc_grid = new Slick.Grid("#spcGrid", spcView, columns, options);

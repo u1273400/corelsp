@@ -34,16 +34,17 @@ namespace corelsp.Shared.Models
         [JSInvokable]
         public static Task<String> SetMonth(string month){
             CMonth=month;
-            log("set month called "+Building.CMonth);
+            //log("set month called "+Building.CMonth);
             Init();
             return Task.FromResult(String.Empty);
         }
 
         public static async Task<bool> Init(){
             var bldgs = Monthly(CMonth);
+            //if(Floor.CBId==null || Floor.CBId==0)Floor.CBId=bldgs[0].Id;
             Floor.CBId=bldgs[0].Id;
             await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
-            log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}"); 
+            //log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}"); 
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{Floor.CBId}/{Building.CMonth}");
         }
     }

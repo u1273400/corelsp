@@ -42,11 +42,10 @@ namespace corelsp.Shared.Models
         }
 
         [JSInvokable]
-        public static async Task<String> SetFloor(long fid){
+        public static async Task<bool> SetFloor(long fid){
             CFId=fid;
             await log("set building called "+CFId);
-            Init();
-            return String.Empty;
+            return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
         }
         public static async Task<bool> Init(){
             //await log($"Space::Init: Cspaces={CSpaces.Length}");
