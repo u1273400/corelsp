@@ -25,6 +25,7 @@
     <script src="node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="node_modules/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
     <script src="SlickGrid-master/lib/jquery.event.drag-2.3.0.js" type="application/javascript"></script>
     
     <script src="SlickGrid-master/slick.core.js" type="application/javascript"></script>
@@ -61,6 +62,11 @@
         };
         window.log = (msg) => {
             console.dir(msg);
+            return true;
+        };
+
+        window.load_gif = () => {
+            loading_gif();
             return true;
         };
 

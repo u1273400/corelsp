@@ -3,6 +3,7 @@
     "bootstrap": "3",
     "bootstrap-slider": "^10.3.4",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "gasparesganga-jquery-loading-overlay": "^2.1.6",
     "moment": "^2.22.2"
   }
 }

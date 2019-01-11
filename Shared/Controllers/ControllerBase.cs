@@ -9,7 +9,10 @@ namespace corelsp.Shared.Controllers
     public class ControllerBase : BlazorComponent
     {
         protected async Task<bool> log(object msg){
-            return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
+            return await AppBase.log(msg);
+        }
+        protected async Task<bool> loading_gif(){
+            return await AppBase.loading_gif();
         }
         protected async Task<bool> init(){
             return await Building.Init();

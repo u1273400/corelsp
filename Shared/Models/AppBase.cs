@@ -11,6 +11,9 @@ namespace corelsp.Shared.Models
         public static async Task<bool> log(object msg){
             return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
         }
+        public static async Task<bool> loading_gif(){
+            return await JSRuntime.Current.InvokeAsync<bool>("load_gif");
+        }
 
     }
 }
