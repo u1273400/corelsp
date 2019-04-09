@@ -37,8 +37,8 @@ function display_spc_grid(data,cols){
       var cell = spc_grid.getCellFromEvent(e);
       var id=data[cell.row].id;
       window.open(
-//        '../admin/building-transactions/'+id,
-//        '_blank' // <- This is what makes it open in a new window.
+        '../admin/space-transactions/resolve/'+id,
+        '_blank' // <- This is what makes it open in a new window.
       );
     });
 
@@ -122,4 +122,8 @@ function display_spc_grid(data,cols){
     // or being on a different page) to stay selected, pass 'false' to the second arg
     spcView.syncGridSelection(spc_grid, true);
     $("#gridContainer").resizable();
-}
+    setTimeout(function () {
+        started_set_month=false;
+    }, 2500);
+    $.LoadingOverlay("hide");
+  }

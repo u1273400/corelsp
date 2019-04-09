@@ -44,7 +44,7 @@ namespace corelsp.Shared.Models
         [JSInvokable]
         public static async Task<bool> SetFloor(long fid){
             CFId=fid;
-            await log("set building called "+CFId);
+            //await log("set floor called "+CFId);
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
         }
         public static async Task<bool> Init(){

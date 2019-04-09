@@ -40,7 +40,7 @@ namespace corelsp.Shared.Models
         [JSInvokable]
         public static async Task<bool> SetBuilding(long bid){
             CBId=bid;
-            await log("Floors::SetBuilding: called "+CBId);
+            //await log("Floors::SetBuilding: called "+CBId);
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{CBId}/{Building.CMonth}");
         }
 

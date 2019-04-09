@@ -38,10 +38,10 @@
     <script src="SlickGrid-master/controls/slick.pager.js"></script>
     <script src="SlickGrid-master/controls/slick.columnpicker.js"></script>
     
+    <script src="js/morejs.js"></script>
     <script src="js/bldgrid.js"></script>
     <script src="js/floorgrid.js"></script>
     <script src="js/spcgrid.js"></script>
-    <script src="js/morejs.js"></script>
     <script type="blazor-boot"></script>
     <script>
         // Define a very simple JavaScript function that just prints
@@ -66,7 +66,12 @@
         };
 
         window.load_gif = () => {
-            loading_gif();
+            $.LoadingOverlay("show");
+            return true;
+        };
+
+        window.set_month_ended = () => {
+            started_set_month=false;
             return true;
         };
 

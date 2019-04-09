@@ -1,7 +1,9 @@
+window.started_set_month=false;
+
 function init2(arr){
   $('#datetimepicker1').datetimepicker({
     format: 'YYYY-MM-DD',
-    //defaultDate: "2012-9-30",
+    defaultDate: "2012-9-30",
     locale: "uk",
     viewMode: 'months',
   });
@@ -18,18 +20,24 @@ function init2(arr){
     },
     slide: function( event, ui ) {
       handle.text( arr[ui.value] );
-      delay(function (e) {
-        console.log("delayb4callback::val="+val);
-        setmonth(arr[ui.value]);
-      }, 500);
+      var self=this;
+      self.v=arr[ui.value];
+      if(started_set_month)return;
+      setTimeout(function () {
+        if(started_set_month)return;
+        setmonth(self.v);
+      }, 2500);
     }
   });
   
 }
 function setmonth(val){
-  console.log("setmonth::val="+val);
+  started_set_month=true;
+  $.LoadingOverlay("show");
   DotNet.invokeMethodAsync('corelsp', 'SetMonth', val)
-  $('#datetimepicker1').data("DateTimePicker").change(val);
+  $("#dti").text(val);
+  console.log("setmonth:: ended set month "+ $("#dti").text());
+  console.log("setmonth:: ended set month "+ (val));
 }
 
 function delay(callback, ms) {
@@ -43,11 +51,11 @@ function delay(callback, ms) {
   };
 }
 
-function loading_gif(){
+function loading_gif(x){
   $.LoadingOverlay("show");
 
   // Hide it after 3 seconds
   setTimeout(function(){
       $.LoadingOverlay("hide");
-  }, 3000);
+  },x || 2000);
 }
