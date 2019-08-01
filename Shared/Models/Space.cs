@@ -16,8 +16,9 @@ namespace corelsp.Shared.Models
         public static object[] spcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
             new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, selectable= false},
+            new{id= "area", name= "Area", field= "area", minWidth= 50, selectable= false},
+            new{id= "usageName", name= "Usage", field= "usageName", minWidth= 100, selectable= false},
             new{id= "dept", name= "Department", field= "dept", minWidth= 150, selectable= false},
-            new{id= "area", name= "Area", field= "area", minWidth= 100, selectable= false},
             new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 100, selectable= false}
         };
 
@@ -26,6 +27,7 @@ namespace corelsp.Shared.Models
         public string Dept { get; set; }
         public long DeptId { get; set; }
         public double Area { get; set; }
+        public string UsageName { get; set; }
         public long Floor { get; set; }
         public DateTime tableDate { get; set; }
 

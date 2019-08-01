@@ -9,7 +9,7 @@ namespace corelsp.Shared.Models
     public class Building: AppBase
     {
         public static Building[] Buildings;
-        public static string CMonth { get; set; } = "2012-01-31";
+        public static string CMonth { get; set; } = "2018-05-31";
 
         public static object[] bldcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },

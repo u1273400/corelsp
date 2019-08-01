@@ -16,6 +16,8 @@ function processCols(cols){
         cols[i][j]=Slick.Editors.Checkbox;
       if(j &&  cols[i][j]==="Slick.Editors.PercentComplete")
         cols[i][j]=Slick.Editors.PercentComplete;
+      if(j &&  cols[i][j]==="Slick.Formatters.Fixed2")
+        cols[i][j]=function(r,c,v,cd,dc){return v.toFixed(2)};
       // console.log(j+":"+ cols[i][j]);
     }
     // console.dir(cols);

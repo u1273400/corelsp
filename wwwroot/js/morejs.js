@@ -3,7 +3,7 @@ window.started_set_month=false;
 function init2(arr){
   $('#datetimepicker1').datetimepicker({
     format: 'YYYY-MM-DD',
-    defaultDate: "2012-9-30",
+    defaultDate: "2018-05-31",
     locale: "uk",
     viewMode: 'months',
   });
@@ -14,7 +14,8 @@ function init2(arr){
     // });
   var handle = $( "#custom-handle" );
   $( "#slider" ).slider({
-    max: arr.length,
+    max: arr.length-1,
+    value: arr.length-1,
     create: function() {
       handle.text( arr[$( this ).slider( "value" )] );
     },
