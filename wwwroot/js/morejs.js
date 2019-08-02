@@ -60,3 +60,15 @@ function loading_gif(x){
       $.LoadingOverlay("hide");
   },x || 2000);
 }
+
+function saveSong(){
+  //hchcs.curr_song().lyrics().replace(new RegExp('`', 'g'), "")
+  //var pd=JSON.stringify({Id:hchcs.curr_song().id(),Lyrics:hchcs.curr_song().lyrics()});
+  var pd=JSON.stringify({id:hchcs.curr_song().id(),Lyrics:hchcs.curr_song().lyrics()});
+  console.log("saving song="+pd);
+  $.post(usong_url, pd)
+  .done(function(data) {
+      console.log("Server Response: " + data);
+      alert('Success!')
+  });
+}
