@@ -12,9 +12,9 @@ namespace corelsp.Shared.Models
         public static string CMonth { get; set; } = "2018-05-31";
 
         public static object[] bldcols = new object[]{
-            // new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable=true },
-            new{id= "buildingRef", name= "Bldg Ref", field= "buildingRef", minWidth= 60, defaultSortAsc= true, selectable= false},
-            new{id= "buildingName", name= "Building Name", field= "buildingName", width= 150, minWidth= 180, selectable= false},
+            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, sortable: true, resizable= false, selectable=true },
+            new{id= "buildingRef", name= "Bldg Ref", field= "buildingRef", minWidth= 60, defaultSortAsc= true, selectable= false, sortable: true},
+            new{id= "buildingName", name= "Building Name", field= "buildingName", width= 150, minWidth= 180, selectable= false, sortable: true},
             new{id= "tableDate", name= "Table Date", field= "tableDate", minWidth= 100, selectable= false}
         };
 
