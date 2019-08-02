@@ -14,11 +14,13 @@ namespace corelsp.Shared.Models
         public static long CFId { get; set; } 
 
         public static object[] spcols = new object[]{
-            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
-            new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, selectable= false},
+            // new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable=true },
+            new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false},
             new{id= "area", name= "Area", field= "area", minWidth= 40, selectable= false},
             new{id= "usageName", name= "Usage", field= "usageName", minWidth= 200, selectable= false},
+            new{id= "capacity", name= "Capacity", field= "capacity", minWidth= 200, selectable= false},
             new{id= "dept", name= "Department", field= "dept", minWidth= 250, selectable= false},
+            new{id= "asas", name= "Asas", field= "asas", minWidth= 250, selectable= false},
             new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 100, selectable= false}
         };
 
@@ -28,7 +30,9 @@ namespace corelsp.Shared.Models
         public long DeptId { get; set; }
         public double Area { get; set; }
         public string UsageName { get; set; }
+        public string Asas { get; set; }
         public long Floor { get; set; }
+        public long Capacity { get; set; }
         public DateTime tableDate { get; set; }
 
         // public static string[] Months(){

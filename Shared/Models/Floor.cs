@@ -14,8 +14,8 @@ namespace corelsp.Shared.Models
         public static long CBId { get; set; } = 2;
 
         public static object[] flrcols = new object[]{
-            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, defaultSortAsc= true, selectable=true },
-            new{id= "floorName", name= "Floor ref", field= "floorName", width= 80, minWidth= 80, selectable= false},
+            // new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable=true },
+            new{id= "floorName", name= "Floor ref", field= "floorName", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false},
             new{id= "gia", name= "GIA", field= "gia", minWidth= 100, selectable= false, formatter="Slick.Formatters.Fixed2"}
         };
 
