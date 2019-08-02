@@ -20,7 +20,7 @@ namespace corelsp.Shared.Models
             new{id= "usageName", name= "Usage", field= "usageName", minWidth= 200, selectable= false},
             new{id= "capacity", name= "Capacity", field= "capacity", minWidth= 200, selectable= false},
             new{id= "dept", name= "Department", field= "dept", minWidth= 250, selectable= false},
-            new{id= "asas", name= "Asas", field= "asas", minWidth= 250, selectable= false},
+            new{id= "asasName", name= "Asas", field= "asasName", minWidth= 250, selectable= false},
             new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 100, selectable= false}
         };
 
@@ -30,7 +30,8 @@ namespace corelsp.Shared.Models
         public long DeptId { get; set; }
         public double Area { get; set; }
         public string UsageName { get; set; }
-        public string Asas { get; set; }
+        public string AsasName { get; set; }
+        public long AsasId { get; set; }
         public long Floor { get; set; }
         public long Capacity { get; set; }
         public DateTime tableDate { get; set; }
