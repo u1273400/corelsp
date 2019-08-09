@@ -19,8 +19,8 @@ namespace corelsp.Shared.Models
             new{id= "area", name= "Area", field= "area", minWidth= 40, selectable= false, sortable: true},
             new{id= "usageName", name= "Usage", field= "usageName", minWidth= 200, selectable= false, sortable: true},
             new{id= "capacity", name= "Capacity", field= "capacity", minWidth= 30, selectable= false, sortable: true},
-            new{id= "dept", name= "Department", field= "dept", minWidth= 250, selectable= false, sortable: true},
-            new{id= "asasName", name= "Asas", field= "asasName", minWidth= 250, selectable= false, sortable: true},
+            new{id= "dept", name= "Department", field= "dept", minWidth= 175, selectable= false, sortable: true},
+            new{id= "asasName", name= "Asas", field= "asasName", minWidth= 175, selectable= false, sortable: true},
             new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 100, selectable= false}
         };
 
