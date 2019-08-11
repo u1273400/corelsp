@@ -7,7 +7,7 @@ function display_spc_grid(data,cols){
     spcView = new Slick.Data.DataView({ inlineFilters: true });
     spc_grid = new Slick.Grid("#spcGrid", spcView, columns, options);
     spc_grid.setSelectionModel(new Slick.RowSelectionModel());
-    // var pager = new Slick.Controls.Pager(spcView, spc_grid, $("#spcPager"));
+    var pager = new Slick.Controls.Pager(spcView, spc_grid, $("#spcPager"));
     // var columnpicker = new Slick.Controls.ColumnPicker(columns, spc_grid, options);
     // move the filter panel defined in a hidden div into spc_grid top panel
     $("#inlineFilterPanel")
@@ -32,6 +32,17 @@ function display_spc_grid(data,cols){
       }
       spc_grid.setSelectedRows(rows);
         e.preventDefault();
+    });
+
+    spc_grid.onBeforeCellEditorDestroy.subscribe(function (e) {
+      $( "#spcGrid" ).removeClass("editing")
+      console.dir('editor destroyed');
+    });
+
+    spc_grid.onBeforeEditCell.subscribe(function (e) {
+      //DotNet.invokeMethodAsync('corelsp', 'IsEditing', true)
+      $( "#spcGrid" ).addClass("editing")
+      console.dir('before edit');
     });
 
     spc_grid.onDblClick.subscribe(function (e) {

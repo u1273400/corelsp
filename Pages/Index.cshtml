@@ -41,7 +41,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">You are Logged in!</div>
-    
+
                         <div class="panel-body">
                             <ul class="nav" role="tablist">
                                 <li role="presentation">
@@ -62,23 +62,23 @@
                 <DateTimePicker />
                 <Slider />
                 <ContextMenu />
-            </div>  
-        
+            </div>
+
             <div id="superman" class="tab-pane fade in active">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div id="myGrid" style="width:100%;height:150px;"></div>
-                    <div id="pager" style="width:100%;height:20px;"></div> 
-                </div>  
+                    <div id="pager" style="width:100%;height:20px;"></div>
+                </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div id="flrGrid" style="width:100%;height:150px;"></div>
-                    <div id="flrPager" style="width:100%;height:20px;"></div> 
-                </div>  
+                    <div id="flrPager" style="width:100%;height:20px;"></div>
+                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div id="spcGrid" style="width:100%;height:300px;"></div>
-                    <div id="spcPager" style="width:100%;height:20px;"></div> 
-                </div>  
-            </div>  
+                    <div id="spcPager" style="width:100%;height:20px;"></div>
+                </div>
+            </div>
            </div>
             <div id="batman" class="tab-pane fade">
                 Say hi
@@ -92,7 +92,7 @@
     int currentCount = 0;
     void IncrementCount()
     {
-        currentCount++; 
+        currentCount++;
     }
     protected override async Task OnInitAsync()
     {
@@ -103,12 +103,15 @@
         // Simulate async initialization work
         await Task.Delay(700);
         await loading_gif();
-        log("Pages/Index.cshtml: Retreiving buildings.json");
         //Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
-        //Building.Buildings = await Http.GetJsonAsync<Building[]>("../api/dfr");
         Building.Buildings = await Http.GetJsonAsync<Building[]>("../api/dfr");
+        var initdata=await Http.GetJsonAsync<Params>("../api/parameters");
+        log("Retrieving data from Pins Estate Manager..");
+        Building.CMonth=Building.InitialDate(initdata.InitDate.MaxDate);
+        //log(new KeyValuePair<string, string>("Hello","world"));
         await init();
     }
+
     /*
     protected override void OnInit()
     {
@@ -121,5 +124,6 @@
         log("Params set");
         //poptestdata();
     }*/
-  
+
 }
+

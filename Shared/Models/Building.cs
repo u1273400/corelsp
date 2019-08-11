@@ -12,9 +12,9 @@ namespace corelsp.Shared.Models
         public static string CMonth { get; set; } = "2018-05-31";
 
         public static object[] bldcols = new object[]{
-            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, sortable: true, resizable= false, selectable=true },
-            new{id= "buildingRef", name= "Bldg Ref", field= "buildingRef", minWidth= 60, defaultSortAsc= true, selectable= false, sortable: true},
-            new{id= "buildingName", name= "Building Name", field= "buildingName", width= 150, minWidth= 180, selectable= false, sortable: true},
+            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, sortable= true, resizable= false, selectable=true },
+            new{id= "buildingRef", name= "Bldg Ref", field= "buildingRef", minWidth= 60, defaultSortAsc= true, selectable= false, sortable= true},
+            new{id= "buildingName", name= "Building Name", field= "buildingName", width= 150, minWidth= 180, selectable= false, sortable= true},
             new{id= "tableDate", name= "Table Date", field= "tableDate", minWidth= 100, selectable= false}
         };
 
@@ -31,6 +31,16 @@ namespace corelsp.Shared.Models
             return Buildings.Where(c=>c.tableDate==DateTime.Parse(monthend)).ToArray();
         }
 
+        public static string InitialDate(DateTime theDate){
+            //return DateTime.Parse(theDate.Year+"-"+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month));
+            return theDate.Year+"-"+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month);
+        }
+
+        [JSInvokable]
+        public static Task<String> GetCMonth(){
+            return Task.FromResult(CMonth);
+        }
+
         [JSInvokable]
         public static Task<String> SetMonth(string month){
             CMonth=month;
@@ -44,9 +54,9 @@ namespace corelsp.Shared.Models
             //if(Floor.CBId==null || Floor.CBId==0)Floor.CBId=bldgs[0].Id;
             Floor.CBId=bldgs[0].Id;
             await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
-            //log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}"); 
+            //log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}");
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{Floor.CBId}/{Building.CMonth}");
         }
     }
-    
+
 }

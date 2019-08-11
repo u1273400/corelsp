@@ -14,13 +14,13 @@ namespace corelsp.Shared.Models
         public static long CFId { get; set; } 
 
         public static object[] spcols = new object[]{
-            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, sortable: true, selectable=true },
-            new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false, sortable: true},
-            new{id= "area", name= "Area", field= "area", minWidth= 40, selectable= false, sortable: true},
-            new{id= "usageName", name= "Usage", field= "usageName", minWidth= 200, selectable= false, sortable: true},
-            new{id= "capacity", name= "Capacity", field= "capacity", minWidth= 30, selectable= false, sortable: true},
-            new{id= "dept", name= "Department", field= "dept", minWidth= 175, selectable= false, sortable: true},
-            new{id= "asasName", name= "Asas", field= "asasName", minWidth= 175, selectable= false, sortable: true},
+            new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, sortable= true, selectable=true },
+            new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false, sortable=true, editor= "Slick.Editors.Text"},
+            new{id= "area", name= "Area", field= "area", minWidth= 40, selectable= false, sortable= true, editor= "Slick.Editors.Text"},
+            new{id= "usageName", name= "Usage", field= "usageName", minWidth= 200, selectable= false, sortable= true},
+            new{id= "capacity", name= "Capacity", field= "capacity", minWidth= 30, selectable= false, sortable=true, editor= "Slick.Editors.Text"},
+            new{id= "dept", name= "Department", field= "dept", minWidth= 175, selectable= false, sortable= true},
+            new{id= "asasName", name= "Asas", field= "asasName", minWidth= 175, selectable= false, sortable= true},
             new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 100, selectable= false}
         };
 

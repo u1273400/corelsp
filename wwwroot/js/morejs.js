@@ -3,9 +3,13 @@ window.started_set_month=false;
 function init2(arr){
   $('#datetimepicker1').datetimepicker({
     format: 'YYYY-MM-DD',
-    defaultDate: "2018-05-31",
+    //defaultDate: "2018-05-31",
     locale: "uk",
     viewMode: 'months',
+  });
+  DotNet.invokeMethodAsync('corelsp', 'GetCMonth').then(resp=>{
+    //console.log(resp);
+    $('#datetimepicker1').data("DateTimePicker").defaultDate(resp);
   });
 // $('#ex1Slider').bootstrapSlider({
     //     formatter: function(value) {

@@ -77,7 +77,7 @@
 
         window.initFloors = (url) =>{
             $.getJSON( url).then(function( data ) {
-                //console.dir(data)
+                //console.dir(DotNet.invokeMethodAsync('corelsp', 'GetCMonth'))
                 if(url.includes("spr"))
                     DotNet.invokeMethodAsync('corelsp', 'SetSpaces', JSON.stringify(data));
                 else
