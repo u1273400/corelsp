@@ -9,7 +9,7 @@ namespace corelsp.Shared.Helpers
     /// <summary>
     /// Extension methods for working with JSON APIs.
     /// </summary>
-    public static class HttpClientJson2
+    public class HttpClientJson2
     {
         static HttpClient httpClient=new HttpClient();
 

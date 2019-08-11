@@ -9,6 +9,7 @@ namespace corelsp.Shared.Models
 {
     public class AppBase
     {
+
         public static async Task<bool> log(object msg){
             return await JSRuntime.Current.InvokeAsync<bool>("log",msg);
         }

@@ -56,7 +56,6 @@ function display_spc_grid(data,cols){
 
     spc_grid.onClick.subscribe(function (e) {
       var cell = spc_grid.getCellFromEvent(e);
-      console.dir(data[cell.row].id);
       // if (spc_grid.getColumns()[cell.cell].id == "priority") {
       //   if (!spc_grid.getEditorLock().commitCurrentEdit()) {
       //     return;
@@ -66,6 +65,20 @@ function display_spc_grid(data,cols){
       //   spc_grid.updateRow(cell.row);
       //   e.stopPropagation();
       // }
+    });
+
+    spc_grid.onContextMenu.subscribe(function (e) {
+      e.preventDefault();
+      var cell = spc_grid.getCellFromEvent(e);
+      //console.dir(e.pageY+','+e.pageX);
+      $("#contextMenu")
+          .data("row", cell.row)
+          .css("top", e.pageY)
+          .css("left", e.pageX)
+          .show();
+      $("body").one("click", function () {
+        $("#contextMenu").hide();
+      });
     });
 
     spcView.onRowCountChanged.subscribe(function (e, args) {
