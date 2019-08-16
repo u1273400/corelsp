@@ -14,10 +14,13 @@ namespace corelsp.Shared.Models
         public static bool Saving { get; set; }=false;
         public static Params InitData=new Params();
 
-        public InitDateData InitDate {get; set; } 
+        public IData iParams {get; set; } 
         public DeptMenuData[] DeptsMenu {get;set;}=new DeptMenuData[]{};
 
-        public struct InitDateData{ public DateTime MaxDate;}
+        public struct IData{ 
+            public DateTime MaxDate;
+            public string SessTok;
+        }
         public struct DeptMenuData{ public int Key;public string Value;}
         
         // [JSInvokable]
