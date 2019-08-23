@@ -108,7 +108,7 @@
         Params.InitData=await Http.GetJsonAsync<Params>("../api/parameters");
         log("Retrieving data from Pins Estate Manager..");
         Building.CMonth=Building.InitialiseDate(Params.InitData.iParams.MaxDate);
-        var postTest=await Http.PostJsonAsync<object>("../api/test1",new {hello="world",_token="testenv"});
+        var postTest=await Http.PostJsonAsync<object>("../api/test",new {hello="world",_token="testenv"});
         log("Test Post async "+postTest);
         await init();
     }
