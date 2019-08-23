@@ -31,7 +31,7 @@ namespace corelsp.Shared.Models
             return Buildings.Where(c=>c.tableDate==DateTime.Parse(monthend)).ToArray();
         }
 
-        public static string InitialDate(DateTime theDate){
+        public static string InitialiseDate(DateTime theDate){
             //return DateTime.Parse(theDate.Year+"-"+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month));
             return theDate.Year+"-"+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month);
         }

@@ -5,10 +5,10 @@
   <li data="Medium">Medium</li>
     <ul>
     <b>Set Department:</b>
-            @foreach (var dept in param.DeptsMenu)
+            @* @foreach (var dept in param.DeptsMenu)
             {
                 <li data=@dept.Key>@dept.Value</li>
-            }
+            } *@
     </ul>
 </ul>
   <style>
@@ -38,11 +38,11 @@
 
 @functions{
    Params param=new Params();
-   bool shouldRender=true;
+   /*@* bool shouldRender=true;
 
    protected override  async Task OnAfterRenderAsync()
    {
-       await Task.Delay(1); 
+       await Task.Delay(1);
        param=Params.InitData;
        this.StateHasChanged();
        shouldRender=(param.DeptsMenu.Length==0);
@@ -51,7 +51,5 @@
     {
         //log("ShouldRender is "+shouldRender);
         return shouldRender;
-    }
+    } *@ */
 }
-
-

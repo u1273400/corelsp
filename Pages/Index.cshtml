@@ -101,15 +101,15 @@
     protected override async Task OnParametersSetAsync()
     {
         // Simulate async initialization work
-        await Task.Delay(700);
+        await Task.Delay(600);
         await loading_gif();
         //Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
         Building.Buildings = await Http.GetJsonAsync<Building[]>("../api/dfr");
-        Params.iParams=await Http.GetJsonAsync<Params>("../api/parameters");
+        Params.InitData=await Http.GetJsonAsync<Params>("../api/parameters");
         log("Retrieving data from Pins Estate Manager..");
-        Building.CMonth=Building.InitialDate(Params.iParams.InitDate.MaxDate);
-//        var postTest=await Http.PostJsonAsync<object>("../api/test1",new KeyValuePair<string,string>("hello","world"));
-//        log("Test Post async"+postTest);
+        Building.CMonth=Building.InitialiseDate(Params.InitData.iParams.MaxDate);
+        var postTest=await Http.PostJsonAsync<object>("../api/test1",new {hello="world",_token="testenv"});
+        log("Test Post async "+postTest);
         await init();
     }
 
@@ -127,4 +127,3 @@
     }*/
 
 }
-
