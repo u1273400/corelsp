@@ -34,5 +34,9 @@ namespace corelsp.Shared.Models
         //     Saving=data;
         //     return true;
         // }
+        [JSInvokable]
+        public static async Task<DeptMenuData[]> Departments(){
+            return InitData.DeptsMenu;
+        }
     }
 }
