@@ -38,7 +38,7 @@ namespace corelsp.Shared.Models
         public long Floor { get; set; }
         public long Capacity { get; set; }
         public DateTime tableDate { get; set; }
-        public string _token { get; set; }="testenv";
+        //public string _token { get; set; }="testenv";
 
         // public static string[] Months(){
         //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
@@ -56,7 +56,20 @@ namespace corelsp.Shared.Models
         public static async Task<bool> SetSpace(string data){
             //await log($"Floors::SetFloors: data = {data}");
             CSpace=Json.Deserialize<Space>(data);
-            var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/test",(object)CSpace);
+            var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/test",new{
+                SpaceId = CSpace.Id,
+                SpaceLabel = CSpace.Label,
+                DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
+                //public long DeptId { get; set; }
+                Area = CSpace.Area,
+                //public string UsageName { get; set; }
+                //public string AsasName { get; set; }
+                //public long AsasId { get; set; }
+                //public long Floor { get; set; }
+                Capacity = CSpace.Capacity,
+                //public DateTime tableDate { get; set; }
+                _token ="testenv"
+            });
             log("Test Post async "+postTest);
             return true;
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Blazor.Components;
@@ -35,8 +36,8 @@ namespace corelsp.Shared.Models
         //     return true;
         // }
         [JSInvokable]
-        public static async Task<DeptMenuData[]> Departments(){
-            return InitData.DeptsMenu;
+        public static async Task<string[]> Departments(){
+            return InitData.DeptsMenu.Select(c=>c.Value).ToArray();
         }
     }
 }

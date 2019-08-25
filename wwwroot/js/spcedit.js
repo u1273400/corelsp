@@ -61,9 +61,9 @@ function AutoCompleteEditor(args) {
         $input = $("<INPUT id='tags' class='editor-text' />");
         $input.appendTo(args.container);
         $input.focus().select();
-  
+        //console.dir(args.column.dataSource);
         $input.autocomplete({
-            source: args.column.dataSource.map(item=>{return item.value;})
+            source: args.column.dataSource//.map(item=>{return item.value;})
         });
     };
   
@@ -84,8 +84,8 @@ function AutoCompleteEditor(args) {
     };
   
     this.serializeValue = function () {
-        // return $input.val();
-        return args.column.dataSource.find(x => x.value === $input.val()).key
+        return $input.val();
+        //return args.column.dataSource.find(x => x.value === $input.val()).key
     };
   
     this.applyValue = function (item, state) {

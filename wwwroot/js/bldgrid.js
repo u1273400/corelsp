@@ -16,7 +16,7 @@ function processCols(cols){
         cols[i][j]=Slick.Editors.Checkbox;
       if(j &&  cols[i][j]==="Slick.Editors.PercentComplete")
         cols[i][j]=Slick.Editors.PercentComplete;
-      if(j &&  cols[i][j]==="Slick.Editors.AutoCompleteEditor")
+      if(j &&  cols[i][j]==="AutoCompleteEditor")
         cols[i][j]=AutoCompleteEditor;
       if(j &&  cols[i][j]==="DataSource.Departments")
         cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Departments');
