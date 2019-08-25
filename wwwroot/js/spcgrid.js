@@ -41,9 +41,7 @@ function display_spc_grid(data,cols){
     });
 
     spc_grid.onBeforeEditCell.subscribe(function (e) {
-      //DotNet.invokeMethodAsync('corelsp', 'IsEditing', true)
       $( "#spcGrid" ).addClass("editing")
-      console.dir('before edit');
     });
 
     spc_grid.onDblClick.subscribe(function (e) {

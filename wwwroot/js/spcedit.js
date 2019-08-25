@@ -53,17 +53,17 @@ function AutoCompleteEditor(args) {
     var $input;
     var defaultValue;
     var scope = this;
-    var calendarOpen = false;
   
-     this.keyCaptureList = [ Slick.keyCode.UP, Slick.keyCode.DOWN, Slick.keyCode.ENTER ];
+    this.keyCaptureList = [ Slick.keyCode.UP, Slick.keyCode.DOWN, Slick.keyCode.ENTER ];
   
     this.init = function () {
         $input = $("<INPUT id='tags' class='editor-text' />");
         $input.appendTo(args.container);
         $input.focus().select();
-        //console.dir(args.column.dataSource);
-        $input.autocomplete({
-            source: args.column.dataSource//.map(item=>{return item.value;})
+        args.column.dataSource.then(resp=>{
+            $input.autocomplete({
+                source: resp//.map(item=>{return item.value;})
+            });
         });
     };
   
@@ -85,11 +85,11 @@ function AutoCompleteEditor(args) {
   
     this.serializeValue = function () {
         return $input.val();
-        //return args.column.dataSource.find(x => x.value === $input.val()).key
     };
   
     this.applyValue = function (item, state) {
-        item[args.column.field] = state;
+
+        item[args.column.field] =state;
     };
   
     this.isValueChanged = function () {
@@ -97,9 +97,18 @@ function AutoCompleteEditor(args) {
     };
   
     this.validate = function () {
-        return {
+        var source = $input.autocomplete( "option", "source" ); 
+        var state=$input.val();
+        // console.dir("state="+state);
+        // console.dir("filt="+ source.filter(v=>{return v===state;}).length);
+        return source.filter(v=>{return v===state;}).length>0? // :item[args.column.field];
+        {
             valid: true,
             msg: null
+        }:
+        {
+            valid: false,
+            msg: "Please select an item"
         };
     };
   
