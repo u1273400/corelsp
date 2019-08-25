@@ -63,7 +63,7 @@ function AutoCompleteEditor(args) {
         $input.focus().select();
   
         $input.autocomplete({
-            source: args.column.dataSource
+            source: args.column.dataSource.map(item=>{return item.value;})
         });
     };
   
@@ -84,7 +84,8 @@ function AutoCompleteEditor(args) {
     };
   
     this.serializeValue = function () {
-        return $input.val();
+        // return $input.val();
+        return args.column.dataSource.find(x => x.value === $input.val()).key
     };
   
     this.applyValue = function (item, state) {
