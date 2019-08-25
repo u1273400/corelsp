@@ -2,8 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
-using Http=Microsoft.AspNetCore.Components.HttpClientJsonExtensions;
-using System.Net.Http;
+using Microsoft.AspNetCore.Components;
+using Http=corelsp.Shared.Helpers.HttpClientJson2;
+//using Microsoft.AspNetCore.Blazor;
+//using Http=System.Net.Http.HttpClient;HttpClientJson2
 
 namespace corelsp.Shared.Models
 {
@@ -11,6 +13,7 @@ namespace corelsp.Shared.Models
     {
 
         public static Space[] CSpaces;
+        public static Space CSpace;
         public static long CFId { get; set; } 
 
         public static object[] spcols = new object[]{
@@ -35,6 +38,7 @@ namespace corelsp.Shared.Models
         public long Floor { get; set; }
         public long Capacity { get; set; }
         public DateTime tableDate { get; set; }
+        public string _token { get; set; }="testenv";
 
         // public static string[] Months(){
         //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
@@ -45,6 +49,15 @@ namespace corelsp.Shared.Models
             //await log($"Floors::SetFloors: data = {data}");
             CSpaces=Json.Deserialize<Space[]>(data);
             Init();
+            return true;
+        }
+
+        [JSInvokable]
+        public static async Task<bool> SetSpace(string data){
+            //await log($"Floors::SetFloors: data = {data}");
+            CSpace=Json.Deserialize<Space>(data);
+            var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/test",(object)CSpace);
+            log("Test Post async "+postTest);
             return true;
         }
 

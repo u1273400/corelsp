@@ -15,6 +15,7 @@ function display_spc_grid(data,cols){
         .show();
     spc_grid.onCellChange.subscribe(function (e, args) {
       spcView.updateItem(args.item.id, args.item);
+      DotNet.invokeMethodAsync('corelsp', 'SetSpace', JSON.stringify(args.item));
     });
     spc_grid.onAddNewRow.subscribe(function (e, args) {
       var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
