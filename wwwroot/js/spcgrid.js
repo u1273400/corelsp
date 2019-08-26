@@ -13,9 +13,15 @@ function display_spc_grid(data,cols){
     $("#inlineFilterPanel")
         .appendTo(spc_grid.getTopPanel())
         .show();
+
     spc_grid.onCellChange.subscribe(function (e, args) {
       spcView.updateItem(args.item.id, args.item);
-      DotNet.invokeMethodAsync('corelsp', 'SetSpace', JSON.stringify(args.item));
+      //console.dir(args.item);
+      DotNet.invokeMethodAsync('corelsp', 'SetSpace', JSON.stringify(args.item)).then(function(resp){
+        $( "#spcGrid" ).removeClass("editing")
+        $( "#spcGrid" ).addClass(resp.status=='success'?"saved":"save-error")
+        console.dir(resp);
+      });
     });
     spc_grid.onAddNewRow.subscribe(function (e, args) {
       var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
@@ -37,10 +43,11 @@ function display_spc_grid(data,cols){
 
     spc_grid.onBeforeCellEditorDestroy.subscribe(function (e) {
       $( "#spcGrid" ).removeClass("editing")
-      console.dir('editor destroyed');
+      //console.dir('editor destroyed');
     });
 
     spc_grid.onBeforeEditCell.subscribe(function (e) {
+      $( "#spcGrid" ).removeClass("saved")
       $( "#spcGrid" ).addClass("editing")
     });
 

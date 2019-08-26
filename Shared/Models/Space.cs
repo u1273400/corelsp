@@ -56,7 +56,7 @@ namespace corelsp.Shared.Models
         public static async Task<bool> SetSpace(string data){
             //await log($"Floors::SetFloors: data = {data}");
             CSpace=Json.Deserialize<Space>(data);
-            var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/test",new{
+            var spc=new{
                 SpaceId = CSpace.Id,
                 SpaceLabel = CSpace.Label,
                 DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
@@ -69,8 +69,10 @@ namespace corelsp.Shared.Models
                 Capacity = CSpace.Capacity,
                 //public DateTime tableDate { get; set; }
                 _token ="testenv"
-            });
-            log("Test Post async "+postTest);
+            };
+            log("Test Post async "+spc);
+            var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
+            // log("Test Post async "+postTest);
             return true;
         }
 

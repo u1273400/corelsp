@@ -262,6 +262,11 @@ input.editor-checkbox {
   border-color: coral;
 }
 
+.save-error{
+  border-style: solid;
+  border-color: red;
+}
+
 .saved{
   border-style: solid;
   border-color: green;

@@ -99,9 +99,9 @@ function AutoCompleteEditor(args) {
     this.validate = function () {
         var source = $input.autocomplete( "option", "source" ); 
         var state=$input.val();
-        // console.dir("state="+state);
-        // console.dir("filt="+ source.filter(v=>{return v===state;}).length);
-        return source.filter(v=>{return v===state;}).length>0? // :item[args.column.field];
+        var filter=source.filter(v=>{return v===state;});
+        if(filter.length==0)prompt("Please select an item from the list");
+        return filter.length>0? // :item[args.column.field];
         {
             valid: true,
             msg: null
