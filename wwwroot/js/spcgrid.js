@@ -43,11 +43,14 @@ function display_spc_grid(data,cols){
 
     spc_grid.onBeforeCellEditorDestroy.subscribe(function (e) {
       $( "#spcGrid" ).removeClass("editing")
+      $( "#spcGrid" ).removeClass("saved")
+      $( "#spcGrid" ).removeClass("save-error")
       //console.dir('editor destroyed');
     });
 
     spc_grid.onBeforeEditCell.subscribe(function (e) {
       $( "#spcGrid" ).removeClass("saved")
+      $( "#spcGrid" ).removeClass("save-error")
       $( "#spcGrid" ).addClass("editing")
     });
 

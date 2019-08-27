@@ -61,20 +61,18 @@ namespace corelsp.Shared.Models
                 SpaceLabel = CSpace.Label,
                 DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
                 UsageId = Params.InitData.UsagesMenu.Where(c => c.Value==CSpace.UsageName).Single().Key,
+                //AsasId = Params.InitData.AsasList.Where(c => c.Value==CSpace.AsasName).Single().Key,
                 Area = CSpace.Area,
-                //public string AsasName { get; set; }
                 //public long AsasId { get; set; }
-                //public long Floor { get; set; }
                 Capacity = CSpace.Capacity,
-                //public DateTime tableDate { get; set; }
                 Cmd="M",
                 TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
                 _token ="testenv"
             };
             log("save obj: "+spc);
-            var postTest=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
-            log("save result="+postTest);
-            return postTest.status=="success";
+            var result=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
+            log("save result="+result);
+            return result.status=="success";
         }
 
         [JSInvokable]
@@ -94,6 +92,7 @@ namespace corelsp.Shared.Models
         public string SpaceLabel  { get; set; }
         public long DepartmentId  { get; set; }
         public long UsageId  { get; set; }
+        public long AsasId  { get; set; }
         public double Area  { get; set; }
         public long Capacity  { get; set; }
         public string Cmd  { get; set; }

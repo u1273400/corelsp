@@ -18,6 +18,7 @@ namespace corelsp.Shared.Models
         public IData iParams {get; set; } 
         public MenuData[] DeptsMenu {get;set;}=new MenuData[]{};
         public MenuData[] UsagesMenu {get;set;}=new MenuData[]{};
+        public MenuData[] AsasList {get;set;}=new MenuData[]{};
 
         public struct IData{ 
             public DateTime MaxDate;
