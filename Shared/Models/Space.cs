@@ -61,7 +61,7 @@ namespace corelsp.Shared.Models
                 SpaceLabel = CSpace.Label,
                 DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
                 UsageId = Params.InitData.UsagesMenu.Where(c => c.Value==CSpace.UsageName).Single().Key,
-                //AsasId = Params.InitData.AsasList.Where(c => c.Value==CSpace.AsasName).Single().Key,
+                AsasId = Params.InitData.AsasList.Where(c => c.Value==CSpace.AsasName).Single().Key,
                 Area = CSpace.Area,
                 //public long AsasId { get; set; }
                 Capacity = CSpace.Capacity,
