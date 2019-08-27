@@ -16,13 +16,14 @@ namespace corelsp.Shared.Models
         public static Params InitData=new Params();
 
         public IData iParams {get; set; } 
-        public DeptMenuData[] DeptsMenu {get;set;}=new DeptMenuData[]{};
+        public MenuData[] DeptsMenu {get;set;}=new MenuData[]{};
+        public MenuData[] UsagesMenu {get;set;}=new MenuData[]{};
 
         public struct IData{ 
             public DateTime MaxDate;
             public string SessTok;
         }
-        public struct DeptMenuData{ public int Key;public string Value;}
+        public struct MenuData{ public int Key;public string Value;}
         
         // [JSInvokable]
         // public static async Task<bool> IsEditing(bool data){
@@ -38,6 +39,10 @@ namespace corelsp.Shared.Models
         [JSInvokable]
         public static async Task<string[]> Departments(){
             return InitData.DeptsMenu.Select(c=>c.Value).ToArray();
+        }
+        [JSInvokable]
+        public static async Task<string[]> Usages(){
+            return InitData.UsagesMenu.Select(c=>c.Value).ToArray();
         }
     }
 }

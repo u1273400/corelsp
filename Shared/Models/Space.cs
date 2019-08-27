@@ -60,17 +60,18 @@ namespace corelsp.Shared.Models
                 SpaceId = CSpace.Id,
                 SpaceLabel = CSpace.Label,
                 DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
-                //public long DeptId { get; set; }
+                UsageId = Params.InitData.UsagesMenu.Where(c => c.Value==CSpace.UsageName).Single().Key,
                 Area = CSpace.Area,
-                //public string UsageName { get; set; }
                 //public string AsasName { get; set; }
                 //public long AsasId { get; set; }
                 //public long Floor { get; set; }
                 Capacity = CSpace.Capacity,
                 //public DateTime tableDate { get; set; }
+                Cmd='M',
+                TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
                 _token ="testenv"
             };
-            log("Test Post async "+spc);
+            log("save obj: "+spc);
             var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
             // log("Test Post async "+postTest);
             return true;
