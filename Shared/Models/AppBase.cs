@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Blazor.Components;
 using corelsp.Shared.Models;
 using corelsp.Shared.Helpers;
-//using Http=Microsoft.AspNetCore.Components.HttpClientJsonExtensions;
+using System.Reflection;
 
 namespace corelsp.Shared.Models
 {
@@ -20,6 +21,10 @@ namespace corelsp.Shared.Models
         public static async Task<T> Fetch<T>(string url){
             return await HttpClientJson2.GetJsonAsync<T>(url);
         }
-
+        public override string ToString()
+        {
+            return this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.Public)
+            .Aggregate(Environment.NewLine, (acc, v) => acc + $"{v.Name} = {v.GetValue(this)}{Environment.NewLine}");
+        }
     }
 }

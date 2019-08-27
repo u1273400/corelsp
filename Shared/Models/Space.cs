@@ -67,14 +67,14 @@ namespace corelsp.Shared.Models
                 //public long Floor { get; set; }
                 Capacity = CSpace.Capacity,
                 //public DateTime tableDate { get; set; }
-                Cmd='M',
+                Cmd="M",
                 TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
                 _token ="testenv"
             };
             log("save obj: "+spc);
-            var postTest=await Http.PostJsonAsync<object>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
-            // log("Test Post async "+postTest);
-            return true;
+            var postTest=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
+            log("save result="+postTest);
+            return postTest.status=="success";
         }
 
         [JSInvokable]
@@ -88,5 +88,15 @@ namespace corelsp.Shared.Models
             return await JSRuntime.Current.InvokeAsync<bool>("initspaces",CSpaces,spcols);
         }
     }
-    
+    public class SpaceSaveObj: AppBase
+    {
+        public long SpaceId { get; set; }
+        public string SpaceLabel  { get; set; }
+        public long DepartmentId  { get; set; }
+        public long UsageId  { get; set; }
+        public double Area  { get; set; }
+        public long Capacity  { get; set; }
+        public string Cmd  { get; set; }
+        public string TransactionDate  { get; set; }
+    }    
 }

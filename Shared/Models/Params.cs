@@ -45,4 +45,13 @@ namespace corelsp.Shared.Models
             return InitData.UsagesMenu.Select(c=>c.Value).ToArray();
         }
     }
+    public class AppJsonResponse: AppBase
+    {
+        public string status { get; set; }
+        public string errmsg { get; set; }
+        public string error{ get; set; }
+        public SpaceSaveObj value{ get; set; }
+        
+    }
+
 }

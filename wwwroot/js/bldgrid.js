@@ -20,6 +20,8 @@ function processCols(cols){
         cols[i][j]=AutoCompleteEditor;
       if(j &&  cols[i][j]==="DataSource.Departments")
         cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Departments');
+      if(j &&  cols[i][j]==="DataSource.Usages")
+        cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Usages');
       if(j &&  cols[i][j]==="Slick.Formatters.Fixed2")
         cols[i][j]=function(r,c,v,cd,dc){return v.toFixed(2)};
       // console.log(j+":"+ cols[i][j]);

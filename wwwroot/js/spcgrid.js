@@ -17,10 +17,10 @@ function display_spc_grid(data,cols){
     spc_grid.onCellChange.subscribe(function (e, args) {
       spcView.updateItem(args.item.id, args.item);
       //console.dir(args.item);
-      DotNet.invokeMethodAsync('corelsp', 'SetSpace', JSON.stringify(args.item)).then(function(resp){
+      DotNet.invokeMethodAsync('corelsp', 'SetSpace', JSON.stringify(args.item)).then(function(saved){
         $( "#spcGrid" ).removeClass("editing")
-        $( "#spcGrid" ).addClass(resp.status=='success'?"saved":"save-error")
-        console.dir(resp);
+        $( "#spcGrid" ).addClass(saved?"saved":"save-error")
+        //console.dir(resp);
       });
     });
     spc_grid.onAddNewRow.subscribe(function (e, args) {
