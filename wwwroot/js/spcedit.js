@@ -12,6 +12,7 @@ $("#contextMenu").click(function (e) {
   // default:
   //     alert("Neither");
   // }  
+  console.log("here" +$(e.target).attr("data"));
   $( $(e.target).attr("data") )
       .data("row", cell.row)
       // .css("top", e.pageY)
