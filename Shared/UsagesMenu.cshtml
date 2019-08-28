@@ -1,0 +1,50 @@
+@inherits ControllerBase
+<ul id="usagesMenu" style="display:none;position:absolute">
+  <b>Set Usage:</b>
+    @foreach (var use in param.usagesMenu)
+    {
+        <li data=@use.Key>@use.Value</li>
+    } 
+</ul>
+  <style>
+    .cell-title {
+      font-weight: bold;
+    }
+    #contextMenu {
+      background: #e1efc7;
+      border: 1px solid gray;
+      padding: 2px;
+      display: inline-block;
+      min-width: 100px;
+      -moz-box-shadow: 2px 2px 2px silver;
+      -webkit-box-shadow: 2px 2px 2px silver;
+      z-index: 9;
+    }
+    #contextMenu li {
+      padding: 4px 4px 4px 14px;
+      list-style: none;
+      cursor: pointer;
+      background: url("../images/arrow_right_peppermint.png") no-repeat center left;
+    }
+    #contextMenu li:hover {
+      background-color: white;
+    }
+  </style>
+
+@functions{
+   Params param=new Params();
+   bool shouldRender=true;
+
+   protected override  async Task OnAfterRenderAsync()
+   {
+       await Task.Delay(1);
+       param=Params.InitData;
+       this.StateHasChanged();
+       shouldRender=(param.DeptsMenu.Length==0);
+   }
+    protected override bool ShouldRender()
+    {
+        //log("ShouldRender is "+shouldRender);
+        return shouldRender;
+    } 
+}
