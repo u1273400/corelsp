@@ -1,7 +1,7 @@
 @inherits ControllerBase
 <ul id="usagesMenu" style="display:none;position:absolute">
   <b>Set Usage:</b>
-    @foreach (var use in param.usagesMenu)
+    @foreach (var use in param.UsagesMenu)
     {
         <li data=@use.Key>@use.Value</li>
     } 
@@ -32,13 +32,12 @@
   </style>
 
 @functions{
-   Params param=new Params();
+   Params param=new Params().InitData;
    bool shouldRender=true;
 
    protected override  async Task OnAfterRenderAsync()
    {
        await Task.Delay(2);
-       param=Params.InitData;
        this.StateHasChanged();
        shouldRender=(param.UsagesMenu.Length==0);
    }
