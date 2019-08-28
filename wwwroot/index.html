@@ -76,6 +76,11 @@
             return true;
         };
 
+        window.save_usage_id = (id) => {
+            save_usage(id);
+            return true;
+        };
+
         window.initFloors = (url) =>{
             $.getJSON( url).then(function( data ) {
                 //console.dir(DotNet.invokeMethodAsync('corelsp', 'GetCMonth'))

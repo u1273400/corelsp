@@ -1,6 +1,5 @@
 var spcView;
 var spc_grid;
-var ctx_row;
 
 function display_spc_grid(data,cols){
     //console.dir(data)
@@ -80,11 +79,11 @@ function display_spc_grid(data,cols){
     spc_grid.onContextMenu.subscribe(function (e) {
       e.preventDefault();
       var cell = spc_grid.getCellFromEvent(e);
-      ctx_row = cell.row;
+      window.ctx_row = cell.row;
       // console.dir(spc_grid.getColumns()[cell.cell].id );
       // console.dir(cell.cell);
       $("#usagesMenu")
-          .data("row", ctx_row)
+          .data("row", window.ctx_row)
           .css("top", 0) //e.pageY)
           .css("left", e.pageX)
           .show();
@@ -164,22 +163,21 @@ function display_spc_grid(data,cols){
     }, 2500);
     $.LoadingOverlay("hide");
   }
-  $(document).ready(function() {
-    $("#usagesMenu").click(function (e) {
-      if (!$(e.target).is("li")) {
-        return;
-      }
-      switch(spc_grid.getColumns()[cell.cell].id) {
-        case "usageName":
-          alert("usageName")
-          break;
-        case "dept":
-          alert("dept")
-          break;
-      default:
-          alert("Neither");
-      }  
-      console.log("here" +$(e.target).attr("data"));
+function save_usage(id) {
+      // if (!$(e.target).is("li")) {
+      //   return;
+      // }
+      // switch(spc_grid.getColumns()[cell.cell].id) {
+      //   case "usageName":
+      //     alert("usageName")
+      //     break;
+      //   case "dept":
+      //     alert("dept")
+      //     break;
+      // default:
+      //     alert("Neither");
+      // }  
+      console.log(id);
       // $( $(e.target).attr("data") )
       //     .data("row", ctx_row)
       //     .css("top", 0) //e.pageY)
