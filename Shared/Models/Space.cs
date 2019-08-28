@@ -71,7 +71,7 @@ namespace corelsp.Shared.Models
             };
             log("save obj: "+spc);
             var result=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
-            log("save result="+result);
+            //log("save result="+result);
             return result.status=="success";
         }
 
