@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace corelsp.Shared.Models
 {
-    public class Params
+    public class Params: AppBase
     {
         public static bool Editing { get; set; }=false;
         public static bool Saving { get; set; }=false;
@@ -18,13 +18,12 @@ namespace corelsp.Shared.Models
         public IData iParams {get; set; } 
         public MenuData[] DeptsMenu {get;set;}=new MenuData[]{};
         public MenuData[] UsagesMenu {get;set;}=new MenuData[]{};
-        public MenuData[] AsasList {get;set;}=new MenuData[]{};
+        //public MenuData[] AsasList {get;set;}=new MenuData[]{};
 
         public struct IData{ 
             public DateTime MaxDate;
             public string SessTok;
         }
-        public struct MenuData{ public int Key;public string Value;}
         
         // [JSInvokable]
         // public static async Task<bool> IsEditing(bool data){
@@ -45,6 +44,10 @@ namespace corelsp.Shared.Models
         public static async Task<string[]> Usages(){
             return InitData.UsagesMenu.Select(c=>c.Value).ToArray();
         }
+    }
+    public class MenuData: AppBase{ 
+        public int Key { get; set; }
+        public string Value { get; set; }
     }
     public class AppJsonResponse: AppBase
     {

@@ -1,5 +1,6 @@
 var spcView;
 var spc_grid;
+var ctx_row;
 
 function display_spc_grid(data,cols){
     //console.dir(data)
@@ -63,30 +64,32 @@ function display_spc_grid(data,cols){
       );
     });
 
-    spc_grid.onClick.subscribe(function (e) {
-      var cell = spc_grid.getCellFromEvent(e);
-      // if (spc_grid.getColumns()[cell.cell].id == "priority") {
-      //   if (!spc_grid.getEditorLock().commitCurrentEdit()) {
-      //     return;
-      //   }
-      //   var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
-      //   data[cell.row].priority = states[data[cell.row].priority];
-      //   spc_grid.updateRow(cell.row);
-      //   e.stopPropagation();
-      // }
-    });
+    // spc_grid.onClick.subscribe(function (e) {
+    //   var cell = spc_grid.getCellFromEvent(e);
+    //   // if (spc_grid.getColumns()[cell.cell].id == "priority") {
+    //   //   if (!spc_grid.getEditorLock().commitCurrentEdit()) {
+    //   //     return;
+    //   //   }
+    //   //   var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
+    //   //   data[cell.row].priority = states[data[cell.row].priority];
+    //   //   spc_grid.updateRow(cell.row);
+    //   //   e.stopPropagation();
+    //   // }
+    // });
 
     spc_grid.onContextMenu.subscribe(function (e) {
       e.preventDefault();
       var cell = spc_grid.getCellFromEvent(e);
-      //console.dir(e.pageY+','+e.pageX);
-      $("#contextMenu")
-          .data("row", cell.row)
-          .css("top", e.pageY)
+      ctx_row = cell.row;
+      // console.dir(spc_grid.getColumns()[cell.cell].id );
+      // console.dir(cell.cell);
+      $("#usagesMenu")
+          .data("row", ctx_row)
+          .css("top", 0) //e.pageY)
           .css("left", e.pageX)
           .show();
       $("body").one("click", function () {
-        $("#contextMenu").hide();
+        $("#usagesMenu").hide();
       });
     });
 
@@ -161,28 +164,29 @@ function display_spc_grid(data,cols){
     }, 2500);
     $.LoadingOverlay("hide");
   }
-
-  $("#contextMenu").click(function (e) {
-    if (!$(e.target).is("li")) {
-      return;
-    }
-    // switch(fruits) {
-    //   case "Banana":
-    //     alert("Hello")
-    //     break;
-    //   case "Apple":
-    //     alert("Welcome")
-    //     break;
-    // default:
-    //     alert("Neither");
-    // }  
-    console.log("here" +$(e.target).attr("data"));
-    $( $(e.target).attr("data") )
-        .data("row", cell.row)
-        // .css("top", e.pageY)
-        .css("left", e.pageX+100)
-        .show();
-    $("body").one("click", function () {
-      $( $(e.target).attr("data") ).hide();
+  $(document).ready(function() {
+    $("#usagesMenu").click(function (e) {
+      if (!$(e.target).is("li")) {
+        return;
+      }
+      switch(spc_grid.getColumns()[cell.cell].id) {
+        case "usageName":
+          alert("usageName")
+          break;
+        case "dept":
+          alert("dept")
+          break;
+      default:
+          alert("Neither");
+      }  
+      console.log("here" +$(e.target).attr("data"));
+      // $( $(e.target).attr("data") )
+      //     .data("row", ctx_row)
+      //     .css("top", 0) //e.pageY)
+      //     .css("left", e.pageX+100)
+      //     .show();
+      // $("body").one("click", function () {
+      //   $( $(e.target).attr("data") ).hide();
+      // });
     });
   });

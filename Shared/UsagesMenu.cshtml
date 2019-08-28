@@ -1,9 +1,9 @@
 @inherits ControllerBase
 <ul id="usagesMenu" style="display:none;position:absolute">
   <b>Set Usage:</b>
-    @foreach (var use in param.UsagesMenu)
+    @foreach (var use in Params.InitData.UsagesMenu)
     {
-        <li data=@use.Key>@use.Value</li>
+        <li data=@use.Key onclick="@ClickMe(use.Key)">@use.Value</li>
     } 
 </ul>
   <style>
@@ -18,7 +18,7 @@
       min-width: 100px;
       -moz-box-shadow: 2px 2px 2px silver;
       -webkit-box-shadow: 2px 2px 2px silver;
-      z-index: 9;
+      z-index: 2000;
     }
     #usagesMenu li {
       padding: 4px 4px 4px 14px;
@@ -32,18 +32,29 @@
   </style>
 
 @functions{
-   Params param=Params.InitData;
    bool shouldRender=true;
+   int counter=0;
+   int timeout=3000;
+
+   public string ClickMe(int v){
+       Console.WriteLine("you clicked me "+v);
+       return ""+v;
+   }
 
    protected override  async Task OnAfterRenderAsync()
    {
+       counter++;
        await Task.Delay(2);
        this.StateHasChanged();
-       shouldRender=(param.UsagesMenu.Length==0);
+       shouldRender=(counter==timeout?false:Params.InitData.UsagesMenu.Length==0);
+       if(!shouldRender && counter < timeout){
+           log("usages loaded..");
+       }
+       if(counter==timeout)log("timed out ..usages not loaded.."+Params.InitData.UsagesMenu.Length);
    }
     protected override bool ShouldRender()
     {
-        //log("ShouldRender is "+shouldRender);
+        //log("ShouldRender is "+Params.InitData.UsagesMenu.Length);
         return shouldRender;
     } 
 }
