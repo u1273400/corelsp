@@ -3,7 +3,7 @@
   <b>Set Usage:</b>
     @foreach (var use in Params.InitData.UsagesMenu)
     {
-        <li data=@use.Key onclick=@(()=>ClickMe(use.Key))>@use.Value</li>
+        <li data=@use.Key onclick=@(()=>ClickMe(use.Value))>@use.Value</li>
     } 
 </ul>
   <style>
@@ -34,11 +34,11 @@
 @functions{
    bool shouldRender=true;
    int counter=0;
-   int timeout=3000;
+   int timeout=10000;
 
-   public void ClickMe(int v){
-       //Console.WriteLine("you clicked me "+v);
-        return await JSRuntime.Current.InvokeAsync<bool>("load_gif");
+   public async Task ClickMe(string v){
+       Console.WriteLine("you clicked me "+v);
+       await JSRuntime.Current.InvokeAsync<bool>("save_usage_id", v);
    }
 
    protected override  async Task OnAfterRenderAsync()

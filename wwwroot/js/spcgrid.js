@@ -1,6 +1,6 @@
 var spcView;
 var spc_grid;
-
+var ctx_cell;
 function display_spc_grid(data,cols){
     //console.dir(data)
     columns=processCols(cols);
@@ -78,8 +78,8 @@ function display_spc_grid(data,cols){
 
     spc_grid.onContextMenu.subscribe(function (e) {
       e.preventDefault();
-      var cell = spc_grid.getCellFromEvent(e);
-      window.ctx_row = cell.row;
+      ctx_cell = spc_grid.getCellFromEvent(e);
+      window.ctx_row = ctx_cell.row;
       // console.dir(spc_grid.getColumns()[cell.cell].id );
       // console.dir(cell.cell);
       $("#usagesMenu")
@@ -163,28 +163,21 @@ function display_spc_grid(data,cols){
     }, 2500);
     $.LoadingOverlay("hide");
   }
-function save_usage(id) {
-      // if (!$(e.target).is("li")) {
-      //   return;
-      // }
-      // switch(spc_grid.getColumns()[cell.cell].id) {
-      //   case "usageName":
-      //     alert("usageName")
-      //     break;
-      //   case "dept":
-      //     alert("dept")
-      //     break;
-      // default:
-      //     alert("Neither");
-      // }  
-      console.log(id);
-      // $( $(e.target).attr("data") )
-      //     .data("row", ctx_row)
-      //     .css("top", 0) //e.pageY)
-      //     .css("left", e.pageX+100)
-      //     .show();
-      // $("body").one("click", function () {
-      //   $( $(e.target).attr("data") ).hide();
-      // });
-    });
-  });
+function save_usage(val) {
+      if (!spc_grid.getEditorLock().commitCurrentEdit()) {
+        return;
+      }
+      switch(spc_grid.getColumns()[ctx_cell.cell].id) {
+        case "usageName":
+          data[ctx_cell.row].usageName = val;
+          break;
+        case "dept":
+          data[ctx_cell.row].dept = val;
+          break;
+      default:
+          return;
+      }  
+      //console.log(spc_grid.getColumns()[ctx_cell.cell].id);
+      spc_grid.updateRow(ctx_cell.row);
+      //e.stopPropagation();
+}

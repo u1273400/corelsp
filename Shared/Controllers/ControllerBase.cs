@@ -8,8 +8,8 @@ namespace corelsp.Shared.Controllers
 {
     public class ControllerBase : BlazorComponent
     {
-        protected async Task<bool> log(object msg){
-            return await AppBase.log(msg);
+        protected void log(object msg){
+            AppBase.log(msg);
         }
         protected async Task<bool> loading_gif(){
             return await AppBase.loading_gif();

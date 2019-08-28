@@ -23,7 +23,7 @@ namespace corelsp.Shared.Helpers
         /// <returns>The response parsed as an object of the generic type.</returns>
         public static async Task<T> GetJsonAsync<T>(string requestUri)
         {
-            await AppBase.log($"HttpClientJsonExtensions::GetJsonAsync: retrieving from {requestUri}");
+            AppBase.log($"HttpClientJsonExtensions::GetJsonAsync: retrieving from {requestUri}");
             return Json.Deserialize<T>(httpClient.GetStringAsync(requestUri).Result);
         }
 
