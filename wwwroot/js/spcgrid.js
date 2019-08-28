@@ -161,3 +161,28 @@ function display_spc_grid(data,cols){
     }, 2500);
     $.LoadingOverlay("hide");
   }
+
+  $("#contextMenu").click(function (e) {
+    if (!$(e.target).is("li")) {
+      return;
+    }
+    // switch(fruits) {
+    //   case "Banana":
+    //     alert("Hello")
+    //     break;
+    //   case "Apple":
+    //     alert("Welcome")
+    //     break;
+    // default:
+    //     alert("Neither");
+    // }  
+    console.log("here" +$(e.target).attr("data"));
+    $( $(e.target).attr("data") )
+        .data("row", cell.row)
+        // .css("top", e.pageY)
+        .css("left", e.pageX+100)
+        .show();
+    $("body").one("click", function () {
+      $( $(e.target).attr("data") ).hide();
+    });
+  });
