@@ -169,10 +169,10 @@ function save_usage(val) {
       }
       switch(spc_grid.getColumns()[ctx_cell.cell].id) {
         case "usageName":
-          data[ctx_cell.row].usageName = val;
+          spc_grid.getData()[ctx_cell.row].usageName = val;
           break;
         case "dept":
-          data[ctx_cell.row].dept = val;
+          spc_grid.getData()[ctx_cell.row].dept = val;
           break;
       default:
           return;
