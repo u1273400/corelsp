@@ -1,6 +1,7 @@
 var spcView;
 var spc_grid;
 var ctx_cell;
+var ctx_data;
 function display_spc_grid(data,cols){
     //console.dir(data)
     columns=processCols(cols);
@@ -79,9 +80,11 @@ function display_spc_grid(data,cols){
     spc_grid.onContextMenu.subscribe(function (e) {
       e.preventDefault();
       ctx_cell = spc_grid.getCellFromEvent(e);
+      ctx_data = data;
       window.ctx_row = ctx_cell.row;
-      // console.dir(spc_grid.getColumns()[cell.cell].id );
-      // console.dir(cell.cell);
+      $( "#spcGrid" ).removeClass("saved")
+      $( "#spcGrid" ).removeClass("save-error")
+      $( "#spcGrid" ).addClass("editing")
       $("#usagesMenu")
           .data("row", window.ctx_row)
           .css("top", 0) //e.pageY)
@@ -169,10 +172,10 @@ function save_usage(val) {
       }
       switch(spc_grid.getColumns()[ctx_cell.cell].id) {
         case "usageName":
-          spc_grid.getData()[ctx_cell.row].usageName = val;
+          ctx_data[ctx_cell.row].usageName = val;
           break;
         case "dept":
-          spc_grid.getData()[ctx_cell.row].dept = val;
+          ctx_data[ctx_cell.row].dept = val;
           break;
       default:
           return;
