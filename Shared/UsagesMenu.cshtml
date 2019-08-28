@@ -10,7 +10,7 @@
     .cell-title {
       font-weight: bold;
     }
-    #contextMenu {
+    #usagesMenu {
       background: #e1efc7;
       border: 1px solid gray;
       padding: 2px;
@@ -37,10 +37,10 @@
 
    protected override  async Task OnAfterRenderAsync()
    {
-       await Task.Delay(1);
+       await Task.Delay(2);
        param=Params.InitData;
        this.StateHasChanged();
-       shouldRender=(param.DeptsMenu.Length==0);
+       shouldRender=(param.UsagesMenu.Length==0);
    }
     protected override bool ShouldRender()
     {
