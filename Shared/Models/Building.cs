@@ -32,8 +32,7 @@ namespace corelsp.Shared.Models
         }
 
         public static string InitialiseDate(DateTime theDate){
-            //return DateTime.Parse(theDate.Year+"-"+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month));
-            return theDate.Year+"-"+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month);
+            return theDate.Year+"-"+(theDate.Month>9?"":"0")+theDate.Month+"-"+DateTime.DaysInMonth(theDate.Year,theDate.Month);
         }
 
         [JSInvokable]
@@ -51,10 +50,10 @@ namespace corelsp.Shared.Models
 
         public static async Task<bool> Init(){
             var bldgs = Monthly(CMonth);
-            //if(Floor.CBId==null || Floor.CBId==0)Floor.CBId=bldgs[0].Id;
+            //log($"Within Building.Init bldgs count={bldgs.Length}, cmonth={CMonth}");
             Floor.CBId=bldgs[0].Id;
             await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
-            //log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}");
+            log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}");
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{Floor.CBId}/{Building.CMonth}");
         }
     }
