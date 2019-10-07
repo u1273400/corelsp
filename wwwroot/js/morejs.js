@@ -1,4 +1,15 @@
 window.started_set_month=false;
+Pusher.logToConsole = true;
+
+var pusher = new Pusher('e012c5a35d8c08d175b9', {
+  cluster: 'eu',
+  forceTLS: true
+});
+
+var channel = pusher.subscribe('my-channel');
+channel.bind('new-space-transaction', function(data) {
+  alert(JSON.stringify(data));
+});
 
 function init2(arr){
   $('#datetimepicker1').datetimepicker({
