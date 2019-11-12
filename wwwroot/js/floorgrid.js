@@ -15,6 +15,7 @@ function display_flr_grid(data,cols){
         .show();
     floor_grid.onCellChange.subscribe(function (e, args) {
       flrView.updateItem(args.item.id, args.item);
+      flr_cell_changed(args.item);
     });
     floor_grid.onAddNewRow.subscribe(function (e, args) {
       var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
@@ -34,6 +35,19 @@ function display_flr_grid(data,cols){
         e.preventDefault();
     });
 
+    floor_grid.onBeforeCellEditorDestroy.subscribe(function (e) {
+      $( "#flrGrid" ).removeClass("editing")
+      $( "#flrGrid" ).removeClass("saved")
+      $( "#flrGrid" ).removeClass("save-error")
+      //console.dir('editor destroyed');
+    });
+  
+    spc_grid.onBeforeEditCell.subscribe(function (e) {
+      $( "#flrGrid" ).removeClass("saved")
+      $( "#flrGrid" ).removeClass("save-error")
+      $( "#flrGrid" ).addClass("editing")
+    });
+  
     floor_grid.onDblClick.subscribe(function (e) {
       var cell = floor_grid.getCellFromEvent(e);
       var id=data[cell.row].id;
@@ -124,4 +138,11 @@ function display_flr_grid(data,cols){
     // or being on a different page) to stay selected, pass 'false' to the second arg
     flrView.syncGridSelection(floor_grid, true);
     $("#gridContainer").resizable();
+}
+function flr_cell_changed(item){
+  DotNet.invokeMethodAsync('corelsp', 'SaveFloorGia', JSON.stringify(item)).then(function(saved){
+    $( "#flrGrid" ).removeClass("editing")
+    $( "#flrGrid" ).addClass(saved?"saved":"save-error")
+    //console.dir(resp);
+  });
 }

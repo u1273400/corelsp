@@ -90,6 +90,7 @@ $(".grid-header .ui-icon")
           $(e.target).removeClass("ui-state-hover")
         });
 function display_grid(data,cols){
+    //console.dir(data);
     columns=processCols(cols);
     dataView = new Slick.Data.DataView({ inlineFilters: true });
     grid = new Slick.Grid("#myGrid", dataView, columns, options);

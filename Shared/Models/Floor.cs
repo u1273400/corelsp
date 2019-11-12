@@ -16,7 +16,7 @@ namespace corelsp.Shared.Models
         public static object[] flrcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, selectable=true, sortable= true },
             new{id= "floorName", name= "Floor ref", field= "floorName", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false, sortable= true},
-            new{id= "gia", name= "GIA", field= "gia", minWidth= 100, selectable= false, formatter="Slick.Formatters.Fixed2", sortable= true},
+            new{id= "gia", name= "GIA", field= "gia", minWidth= 100, selectable= false, formatter="Slick.Formatters.Fixed2", sortable= true, editor= "Slick.Editors.Text"},
             new{id= "tableDate", name= "tableDate", field= "tableDate", minWidth= 100, selectable= false}
         };
 
@@ -43,6 +43,28 @@ namespace corelsp.Shared.Models
             CBId=bid;
             //await log("Floors::SetBuilding: called "+CBId);
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{CBId}/{Building.CMonth}");
+        }
+
+        [JSInvokable]
+        public static async Task<bool> SaveFloorGia(string data){
+            var CFloor=Json.Deserialize<Floor>(data);
+            var flr=new{
+                SpaceId = CSpace.Id,
+                SpaceLabel = CSpace.Label,
+                DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
+                UsageId = Params.InitData.UsagesMenu.Where(c => c.Value==CSpace.UsageName).Single().Key,
+                //AsasId = Params.InitData.AsasList.Where(c => c.Value==CSpace.AsasName).Single().Key,
+                Area = CSpace.Area,
+                //public long AsasId { get; set; }
+                Capacity = CSpace.Capacity,
+                Cmd="M",
+                TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
+                _token ="testenv"
+            };
+            log("save obj: "+flr);
+            var result=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
+            log("save result="+result);
+            return result.status=="success";
         }
 
         public static async Task<bool> Init(){
