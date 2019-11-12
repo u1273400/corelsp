@@ -27,7 +27,7 @@ function processCols(cols){
       if(j &&  cols[i][j]==="DataSource.Asas")
         cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Asas');
       if(j &&  cols[i][j]==="Slick.Formatters.Fixed2")
-        cols[i][j]=function(r,c,v,cd,dc){return v.toFixed(2)};
+        cols[i][j]=function(r,c,v,cd,dc){return parseFloat(v).toFixed(2)};
       // console.log(j+":"+ cols[i][j]);
     }
     // console.dir(cols);

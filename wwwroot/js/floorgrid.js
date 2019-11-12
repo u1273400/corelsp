@@ -1,6 +1,7 @@
 function isIEPreVer9() { var v = navigator.appVersion.match(/MSIE ([\d.]+)/i); return (v ? v[1] < 9 : false); }
 var flrView;
 var floor_grid;
+var ctx_cell;
 
 function display_flr_grid(data,cols){
   columns=processCols(cols);
@@ -55,6 +56,27 @@ function display_flr_grid(data,cols){
       '../admin/floor-transactions/resolve/'+id,
       '_blank' // <- This is what makes it open in a new window.
     );
+  });
+
+  floor_grid.onClick.subscribe(function (e) {
+    var cell = floor_grid.getCellFromEvent(e);
+    var id=data[cell.row].id;
+    if(cell.cell!=2)DotNet.invokeMethodAsync('corelsp', 'SetFloor', id);
+    // floor_grid.setActiveCell(cell.row,cell.cell);
+    // // Invoke the Date editor on that cell
+    // floor_grid.editActiveCell(Slick.Editors.Text);//Slick.Editors.Date
+    // console.dir(cell);
+    // console.dir(floor_grid.getActiveCell());
+    // console.dir(floor_grid.getCellEditor());
+    // if (floor_grid.getColumns()[cell.cell].id == "priority") {
+    //   if (!floor_grid.getEditorLock().commitCurrentEdit()) {
+    //     return;
+    //   }
+    //   var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
+    //   data[cell.row].priority = states[data[cell.row].priority];
+    //   floor_grid.updateRow(cell.row);
+    //   e.stopPropagation();
+    // }
   });
 
   flrView.onRowCountChanged.subscribe(function (e, args) {

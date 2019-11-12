@@ -53,9 +53,10 @@ namespace corelsp.Shared.Models
                 TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
                 Cmd = "M",
                 GrossInternalArea = CFloor.Gia,
+                _token ="testenv",
             };
             log("save obj: "+flr);
-            var result=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateFloorTx",flr);
+            var result=await Http.PostJsonAsync<FloorJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateFloorTx",flr);
             log("save result="+result);
             return result.status=="success";
         }
@@ -68,5 +69,18 @@ namespace corelsp.Shared.Models
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
         }
     }
-    
+    public class FloorSaveObj: AppBase
+    {
+        public string    Cmd{ get; set; }
+        public string    FloorBuildingRef{ get; set; }
+        public long    FloorId{ get; set; }
+        public string    FloorLiveDate{ get; set; }
+        public long    FloorTransactionId{ get; set; }
+        public double    GrossInternalArea{ get; set; }
+        // public long    ModifiedBy{ get; set; }
+        public string    Notes{ get; set; }
+        public string    TransactionDate{ get; set; }
+        // public string    created_at{ get; set; }
+        // public string    updated_at{ get; set; }
+    }     
 }
