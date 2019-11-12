@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
-using Http=Microsoft.AspNetCore.Components.HttpClientJsonExtensions;
+using Http=corelsp.Shared.Helpers.HttpClientJson2;
 using System.Net.Http;
 
 namespace corelsp.Shared.Models
@@ -49,20 +49,13 @@ namespace corelsp.Shared.Models
         public static async Task<bool> SaveFloorGia(string data){
             var CFloor=Json.Deserialize<Floor>(data);
             var flr=new{
-                SpaceId = CSpace.Id,
-                SpaceLabel = CSpace.Label,
-                DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
-                UsageId = Params.InitData.UsagesMenu.Where(c => c.Value==CSpace.UsageName).Single().Key,
-                //AsasId = Params.InitData.AsasList.Where(c => c.Value==CSpace.AsasName).Single().Key,
-                Area = CSpace.Area,
-                //public long AsasId { get; set; }
-                Capacity = CSpace.Capacity,
-                Cmd="M",
+                FloorId = CFloor.Id,
                 TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
-                _token ="testenv"
+                Cmd = "M",
+                GrossInternalArea = CFloor.Gia,
             };
             log("save obj: "+flr);
-            var result=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateSpaceTx",spc);
+            var result=await Http.PostJsonAsync<AppJsonResponse>("http://iris-dev.hud.ac.uk:8000/api/updateFloorTx",flr);
             log("save result="+result);
             return result.status=="success";
         }
