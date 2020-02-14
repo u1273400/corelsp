@@ -90,6 +90,7 @@ namespace corelsp.Shared.Models
         public long SpaceId { get; set; }
         public string SpaceLabel  { get; set; }
         public long DepartmentId  { get; set; }
+        public long UsageId  { get; set; }
         public long AsasId  { get; set; }
         public double Area  { get; set; }
         public long Capacity  { get; set; }
