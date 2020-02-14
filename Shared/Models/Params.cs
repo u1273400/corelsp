@@ -54,7 +54,7 @@ namespace corelsp.Shared.Models
         public string status { get; set; }
         public string errmsg { get; set; }
         public string error{ get; set; }
-        //public SpaceSaveObj value{ get; set; }
+        public SpaceSaveObj value{ get; set; }
     }
     public class FloorJsonResponse: AppBase
     {
