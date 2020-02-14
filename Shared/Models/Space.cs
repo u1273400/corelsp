@@ -14,7 +14,7 @@ namespace corelsp.Shared.Models
 
         public static Space[] CSpaces;
         public static Space CSpace;
-        public static long CFId { get; set; } 
+        public static long CFId { get; set; }
 
         public static object[] spcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, sortable= true, selectable=true },
@@ -35,7 +35,7 @@ namespace corelsp.Shared.Models
         public string UsageName { get; set; }
         public string AsasName { get; set; }
         public long AsasId { get; set; }
-        public long Floor { get; set; }
+        public long SpaceTransactionId { get; set; }
         public long Capacity { get; set; }
         public DateTime tableDate { get; set; }
         //public string _token { get; set; }="testenv";
@@ -58,14 +58,13 @@ namespace corelsp.Shared.Models
             CSpace=Json.Deserialize<Space>(data);
             var spc=new{
                 SpaceId = CSpace.Id,
-                SpaceLabel = CSpace.Label,
+                SpaceLabel = CSpace.Label.ToUpper(),
                 DepartmentId = Params.InitData.DeptsMenu.Where(c => c.Value==CSpace.Dept).Single().Key,
                 UsageId = Params.InitData.UsagesMenu.Where(c => c.Value==CSpace.UsageName).Single().Key,
                 //AsasId = Params.InitData.AsasList.Where(c => c.Value==CSpace.AsasName).Single().Key,
                 Area = CSpace.Area,
-                //public long AsasId { get; set; }
+                SpaceTransactionId = CSpace.SpaceTransactionId,
                 Capacity = CSpace.Capacity,
-                Cmd="M",
                 TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
                 _token ="testenv"
             };
@@ -91,11 +90,10 @@ namespace corelsp.Shared.Models
         public long SpaceId { get; set; }
         public string SpaceLabel  { get; set; }
         public long DepartmentId  { get; set; }
-        public long UsageId  { get; set; }
         public long AsasId  { get; set; }
         public double Area  { get; set; }
         public long Capacity  { get; set; }
         public string Cmd  { get; set; }
         public string TransactionDate  { get; set; }
-    }    
+    }
 }

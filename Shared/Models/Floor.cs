@@ -51,7 +51,6 @@ namespace corelsp.Shared.Models
             var flr=new{
                 FloorId = CFloor.Id,
                 TransactionDate=DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
-                Cmd = "M",
                 GrossInternalArea = CFloor.Gia,
                 _token ="testenv",
             };
@@ -65,7 +64,7 @@ namespace corelsp.Shared.Models
             //if(Space.CFId==null || Space.CFId==0)Space.CFId=CFloors[0].Id;
             Space.CFId=CFloors[0].Id;
             await JSRuntime.Current.InvokeAsync<bool>("initflrs",CFloors,flrcols);
-            //log($"Floor::Init: Initialising spaces../api/spr/{Space.CFId}/{Building.CMonth}"); 
+            //log($"Floor::Init: Initialising spaces../api/spr/{Space.CFId}/{Building.CMonth}");
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
         }
     }
@@ -82,5 +81,5 @@ namespace corelsp.Shared.Models
         public string    TransactionDate{ get; set; }
         // public string    created_at{ get; set; }
         // public string    updated_at{ get; set; }
-    }     
+    }
 }
