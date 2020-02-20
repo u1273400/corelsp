@@ -16,6 +16,18 @@ function processCols(cols){
         cols[i][j]=Slick.Editors.Checkbox;
       if(j &&  cols[i][j]==="Slick.Editors.PercentComplete")
         cols[i][j]=Slick.Editors.PercentComplete;
+      if(j &&  cols[i][j]==="AutoCompleteEditor")
+        cols[i][j]=AutoCompleteEditor;
+      if(j &&  cols[i][j]==="DataSource.Departments")
+        cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Departments');
+      if(j &&  cols[i][j]==="DataSource.Usages")
+        cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Usages');
+      if(j &&  cols[i][j]==="DataSource.FloorsList")
+        cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'FloorsList');
+      if(j &&  cols[i][j]==="DataSource.Asas")
+        cols[i][j]=DotNet.invokeMethodAsync('corelsp', 'Asas');
+      if(j &&  cols[i][j]==="Slick.Formatters.Fixed2")
+        cols[i][j]=function(r,c,v,cd,dc){return v.toFixed(2)};
       // console.log(j+":"+ cols[i][j]);
     }
     // console.dir(cols);
@@ -78,7 +90,6 @@ $(".grid-header .ui-icon")
           $(e.target).removeClass("ui-state-hover")
         });
 function display_grid(data,cols){
-    console.dir("processing buildings..")
     columns=processCols(cols);
     dataView = new Slick.Data.DataView({ inlineFilters: true });
     grid = new Slick.Grid("#myGrid", dataView, columns, options);
@@ -111,7 +122,8 @@ function display_grid(data,cols){
     });
     grid.onClick.subscribe(function (e) {
       var cell = grid.getCellFromEvent(e);
-      console.dir(data[cell.row].id);
+      var id=data[cell.row].id;
+      DotNet.invokeMethodAsync('corelsp', 'SetBuilding', id);
       // if (grid.getColumns()[cell.cell].id == "priority") {
       //   if (!grid.getEditorLock().commitCurrentEdit()) {
       //     return;
@@ -121,6 +133,15 @@ function display_grid(data,cols){
       //   grid.updateRow(cell.row);
       //   e.stopPropagation();
       // }
+    });
+
+    grid.onDblClick.subscribe(function (e) {
+      var cell = grid.getCellFromEvent(e);
+      var id=data[cell.row].id;
+      window.open(
+        '../admin/building-transactions/resolve/'+id,
+        '_blank' // <- This is what makes it open in a new window.
+      );
     });
 
     dataView.onRowCountChanged.subscribe(function (e, args) {

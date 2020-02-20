@@ -1,0 +1,60 @@
+@inherits ControllerBase
+<ul id="usagesMenu" style="display:none;position:absolute">
+  <b>Set Usage:</b>
+    @foreach (var use in Params.InitData.UsagesMenu)
+    {
+        <li data=@use.Key onclick=@(()=>ClickMe(use.Value))>@use.Value</li>
+    } 
+</ul>
+  <style>
+    .cell-title {
+      font-weight: bold;
+    }
+    #usagesMenu {
+      background: #e1efc7;
+      border: 1px solid gray;
+      padding: 2px;
+      display: inline-block;
+      min-width: 100px;
+      -moz-box-shadow: 2px 2px 2px silver;
+      -webkit-box-shadow: 2px 2px 2px silver;
+      z-index: 2000;
+    }
+    #usagesMenu li {
+      padding: 4px 4px 4px 14px;
+      list-style: none;
+      cursor: pointer;
+      background: url("../images/arrow_right_peppermint.png") no-repeat center left;
+    }
+    #usagesMenu li:hover {
+      background-color: white;
+    }
+  </style>
+
+@functions{
+   bool shouldRender=true;
+   int counter=0;
+   int timeout=10000;
+
+   public async Task ClickMe(string v){
+       Console.WriteLine("you clicked me "+v);
+       await JSRuntime.Current.InvokeAsync<bool>("save_usage_id", v);
+   }
+
+   protected override  async Task OnAfterRenderAsync()
+   {
+       counter++;
+       await Task.Delay(2);
+       this.StateHasChanged();
+       shouldRender=(counter==timeout?false:Params.InitData.UsagesMenu.Length==0);
+       if(!shouldRender && counter < timeout){
+           log("usages loaded..");
+       }
+       if(counter==timeout)log("timed out ..usages not loaded.."+Params.InitData.UsagesMenu.Length);
+   }
+    protected override bool ShouldRender()
+    {
+        //log("ShouldRender is "+Params.InitData.UsagesMenu.Length);
+        return shouldRender;
+    } 
+}

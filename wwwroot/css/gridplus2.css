@@ -256,3 +256,18 @@ input.editor-checkbox {
   text-align: right;
   font-size: 10px;
 }
+
+.editing{
+  border-style: solid;
+  border-color: coral;
+}
+
+.save-error{
+  border-style: solid;
+  border-color: red;
+}
+
+.saved{
+  border-style: solid;
+  border-color: green;
+}

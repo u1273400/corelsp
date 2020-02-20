@@ -7,6 +7,8 @@ namespace corelsp
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddBlazorStyled();
+            //serviceCollection.AddBlazorStyled();
         }
 
         public void Configure(IBlazorApplicationBuilder app)

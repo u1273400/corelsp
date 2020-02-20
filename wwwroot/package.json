@@ -3,6 +3,9 @@
     "bootstrap": "3",
     "bootstrap-slider": "^10.3.4",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
-    "moment": "^2.22.2"
+    "gasparesganga-jquery-loading-overlay": "^2.1.6",
+    "laravel-echo": "^1.6.0",
+    "moment": "^2.22.2",
+    "pusher-js": "^5.0.2"
   }
 }
