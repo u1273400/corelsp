@@ -18,7 +18,7 @@ namespace corelsp.Shared.Models
 
         public static object[] spcols = new object[]{
             new{id= "id", name= "Id", field= "id", behavior= "select", cssClass= "cell-selection", width= 40, cannotTriggerInsert= true, resizable= false, sortable= true, selectable=true },
-            new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false, sortable=true, editor= "Slick.Editors.Text"},
+            new{id= "label", name= "Space", field= "label", width= 80, minWidth= 80, defaultSortAsc= true, selectable= false, sortable=true, editor= "AutoCompleteEditor", dataSource= "DataSource.Labels"},
             new{id= "area", name= "Area", field= "area", minWidth= 40, selectable= false, sortable= true, editor= "Slick.Editors.Text"},
             new{id= "usageName", name= "Usage", field= "usageName", minWidth= 200, selectable= false, sortable= true},
             new{id= "capacity", name= "Capacity", field= "capacity", minWidth= 30, selectable= false, sortable=true, editor= "Slick.Editors.Text"},
@@ -39,10 +39,7 @@ namespace corelsp.Shared.Models
         public long Capacity { get; set; }
         public DateTime tableDate { get; set; }
         //public string _token { get; set; }="testenv";
-
-        // public static string[] Months(){
-        //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
-        // }
+        public Space(){}
 
         [JSInvokable]
         public static async Task<bool> SetSpaces(string data){

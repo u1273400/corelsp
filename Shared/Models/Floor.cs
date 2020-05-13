@@ -26,9 +26,7 @@ namespace corelsp.Shared.Models
         public double Gia { get; set; }
         public DateTime tableDate { get; set; }
 
-        // public static string[] Months(){
-        //     return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
-        // }
+        public Floor(){}
 
         [JSInvokable]
         public static async Task<bool> SetFloors(string data){

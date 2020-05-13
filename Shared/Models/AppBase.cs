@@ -28,7 +28,7 @@ namespace corelsp.Shared.Models
         public override string ToString()
         {
             return this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.Public)
-            .Aggregate(Environment.NewLine, (acc, v) => acc + $"{v.Name} = {v.GetValue(this)}{Environment.NewLine}");
+            .Aggregate(this.GetType().FullName+Environment.NewLine, (acc, v) => acc + $"{v.Name} = {v.GetValue(this)}{Environment.NewLine}");
         }
     }
 }

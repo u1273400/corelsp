@@ -106,8 +106,8 @@
         await loading_gif();
         //Building.Buildings = await Http.GetJsonAsync<Building[]>("sample-data/buildings.json");
         Building.Buildings = await Http.GetJsonAsync<Building[]>("../api/dfr");
-        Params.InitData=await Http.GetJsonAsync<Params>("../api/parameters");
         log("Retrieving data from Pins Estate Manager..");
+        Params.InitData=await Http.GetJsonAsync<Params>("../api/parameters");
         Building.CMonth=Building.InitialiseDate(Params.InitData.iParams.MaxDate);
         //var postTest=await Http.PostJsonAsync<object>("../api/test",new {hello="world",_token="testenv"});
         //log("Test Post async "+postTest);

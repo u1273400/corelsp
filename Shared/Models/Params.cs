@@ -18,8 +18,9 @@ namespace corelsp.Shared.Models
         public IData iParams {get; set; } 
         public MenuData[] DeptsMenu {get;set;}=new MenuData[]{};
         public MenuData[] UsagesMenu {get;set;}=new MenuData[]{};
-        //public MenuData[] AsasList {get;set;}=new MenuData[]{};
+        public MenuData[] LabelsMenu {get;set;}=new MenuData[]{};
 
+        public Params(){}
         public struct IData{ 
             public DateTime MaxDate;
             public string SessTok;
@@ -44,10 +45,16 @@ namespace corelsp.Shared.Models
         public static async Task<string[]> Usages(){
             return InitData.UsagesMenu.Select(c=>c.Value).ToArray();
         }
+        [JSInvokable]
+        public static async Task<string[]> Labels(){
+            return InitData.LabelsMenu.Select(c=>c.Value).ToArray();
+        }
     }
     public class MenuData: AppBase{ 
         public int Key { get; set; }
         public string Value { get; set; }
+
+        public MenuData(){}
     }
     public class AppJsonResponse: AppBase
     {
@@ -55,6 +62,8 @@ namespace corelsp.Shared.Models
         public string errmsg { get; set; }
         public string error{ get; set; }
         public SpaceSaveObj value{ get; set; }
+
+        public AppJsonResponse(){}
     }
     public class FloorJsonResponse: AppBase
     {
@@ -62,6 +71,7 @@ namespace corelsp.Shared.Models
         public string errmsg { get; set; }
         public string error{ get; set; }
         public FloorSaveObj value{ get; set; }
+        public FloorJsonResponse(){}
     }
 
 }

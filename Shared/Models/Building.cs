@@ -22,6 +22,7 @@ namespace corelsp.Shared.Models
         public string BuildingRef { get; set; }
         public string BuildingName { get; set; }
         public DateTime tableDate { get; set; }
+        public Building(){}
 
         public static string[] Months(){
             return Buildings.OrderBy(c=>c.tableDate).Select(c=>c.tableDate.ToString("yyyy-MM-dd")).Distinct().ToArray();
