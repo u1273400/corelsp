@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="build" default="replace">
+<project name="build" default="cleanup">
   <target name="replace" depends="publish" description="replace after publish">
     <replace file="publishable/corelsp/dist/index.html" 
               token="    &lt;base href=&quot;/" 
               value="    &lt;base href=&quot;/corelsp/"/>
   </target>
-  <target name="dist" depends="replace" description="Build distributable">
+  <target name="dist" description="Build distributable">
     <scp todir="paisja:mar07ja@webdev.hud.ac.uk:/home/paisja/lsp/public/corelsp/"
       sftp="true"
       trust="true"

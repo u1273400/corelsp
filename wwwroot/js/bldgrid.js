@@ -124,6 +124,7 @@ function display_grid(data,cols){
     grid.onClick.subscribe(function (e) {
       var cell = grid.getCellFromEvent(e);
       var id=data[cell.row].id;
+      //console.log('opening bid='+id);
       DotNet.invokeMethodAsync('corelsp', 'SetBuilding', id);
       // if (grid.getColumns()[cell.cell].id == "priority") {
       //   if (!grid.getEditorLock().commitCurrentEdit()) {

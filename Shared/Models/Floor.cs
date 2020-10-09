@@ -30,7 +30,7 @@ namespace corelsp.Shared.Models
 
         [JSInvokable]
         public static async Task<bool> SetFloors(string data){
-            //await log($"Floors::SetFloors: data = {data}");
+            // log($"Floors::SetFloors: data = {data}");
             CFloors=Json.Deserialize<Floor[]>(data);
             Init();
             return true;
@@ -39,7 +39,7 @@ namespace corelsp.Shared.Models
         [JSInvokable]
         public static async Task<bool> SetBuilding(long bid){
             CBId=bid;
-            //await log("Floors::SetBuilding: called "+CBId);
+            log("Floors::SetBuilding: called "+CBId);
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{CBId}/{Building.CMonth}");
         }
 
@@ -60,9 +60,12 @@ namespace corelsp.Shared.Models
 
         public static async Task<bool> Init(){
             //if(Space.CFId==null || Space.CFId==0)Space.CFId=CFloors[0].Id;
-            Space.CFId=CFloors[0].Id;
+            if(CFloors.Count()>0)
+                Space.CFId=CFloors[0].Id;
+            else
+                Space.CFId=0;
+            // log($"Floor::Init: Initialising floors");
             await JSRuntime.Current.InvokeAsync<bool>("initflrs",CFloors,flrcols);
-            //log($"Floor::Init: Initialising spaces../api/spr/{Space.CFId}/{Building.CMonth}");
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
         }
     }
@@ -77,7 +80,6 @@ namespace corelsp.Shared.Models
         // public long    ModifiedBy{ get; set; }
         public string    Notes{ get; set; }
         public string    TransactionDate{ get; set; }
-        // public string    created_at{ get; set; }
-        // public string    updated_at{ get; set; }
+        public FloorSaveObj(){}
     }
 }

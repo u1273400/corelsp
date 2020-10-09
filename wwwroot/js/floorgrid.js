@@ -4,6 +4,8 @@ var floor_grid;
 var ctx_cell;
 
 function display_flr_grid(data,cols){
+  // console.log('floor data');
+  // console.dir(data);
   columns=processCols(cols);
   flrView = new Slick.Data.DataView({ inlineFilters: true });
   floor_grid = new Slick.Grid("#flrGrid", flrView, columns, options);

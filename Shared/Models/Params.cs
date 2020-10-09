@@ -21,9 +21,11 @@ namespace corelsp.Shared.Models
         public MenuData[] LabelsMenu {get;set;}=new MenuData[]{};
 
         public Params(){}
-        public struct IData{ 
+        public class IData{ 
             public DateTime MaxDate;
             public string SessTok;
+
+            public IData(){}
         }
         
         // [JSInvokable]

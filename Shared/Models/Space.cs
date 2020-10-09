@@ -74,7 +74,7 @@ namespace corelsp.Shared.Models
         [JSInvokable]
         public static async Task<bool> SetFloor(long fid){
             CFId=fid;
-            //await log("set floor called "+CFId);
+            log($"set floor called {CFId}/{Building.CMonth}");
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/spr/{Space.CFId}/{Building.CMonth}");
         }
         public static async Task<bool> Init(){
@@ -93,5 +93,7 @@ namespace corelsp.Shared.Models
         public long Capacity  { get; set; }
         public string Cmd  { get; set; }
         public string TransactionDate  { get; set; }
+        public SpaceSaveObj(){}
+
     }
 }
