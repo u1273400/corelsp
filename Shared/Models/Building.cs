@@ -29,7 +29,8 @@ namespace corelsp.Shared.Models
         }
 
         public static Building[] Monthly(string monthend){
-            return Buildings.Where(c=>c.tableDate==DateTime.Parse(monthend)).ToArray();
+           // log($"Within Building.Monthly bldgs count={Buildings.Length}, cmonth={CMonth}");
+           return Buildings.Where(c=>c.tableDate==DateTime.Parse(monthend)).ToArray();
         }
 
         public static string InitialiseDate(DateTime theDate){
@@ -51,8 +52,12 @@ namespace corelsp.Shared.Models
 
         public static async Task<bool> Init(){
             var bldgs = Monthly(CMonth);
-            //log($"Within Building.Init bldgs count={bldgs.Length}, cmonth={CMonth}");
-            Floor.CBId=bldgs[0].Id;
+            if(bldgs.Length>0)
+                Floor.CBId=bldgs[0].Id;
+            else{
+                var err=($"No buildings found! Please check the input month.");
+                throw new System.IndexOutOfRangeException(err);
+            }
             await JSRuntime.Current.InvokeAsync<bool>("init",bldgs,bldcols,Months());
             log($"Building::Init: Initialising floors../api/flr/{Floor.CBId}/{Building.CMonth}");
             return await JSRuntime.Current.InvokeAsync<bool>("initFloors",$"../api/flr/{Floor.CBId}/{Building.CMonth}");

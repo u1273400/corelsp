@@ -15,8 +15,10 @@ namespace corelsp.Shared.Controllers
             return await AppBase.loading_gif();
         }
         protected async Task<bool> init(){
+            log($"initialising buildings..");
             return await Building.Init();
         }
+
         protected object[] testdata(){
             return TestData.populate();    
         }
