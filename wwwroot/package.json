@@ -5,7 +5,7 @@
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "gasparesganga-jquery-loading-overlay": "^2.1.6",
     "laravel-echo": "^1.6.0",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "pusher-js": "^5.0.2"
   }
 }
